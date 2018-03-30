@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'app';
+  tabs = [
+    {label: 'Leaderboards', link: '/leaderboards'},
+    {label: 'Game Submission', link: '/games/create'},
+    // {label: 'Player Registration', link: '/players/create'},
+  ];
 }

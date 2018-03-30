@@ -1,0 +1,8 @@
+<div class="leaderboards">
+  <app-leaderboard
+    *ngFor="let game of games"
+    [game]="game"
+    [players]="players"
+    class="leaderboard"
+  ></app-leaderboard>
+</div>
