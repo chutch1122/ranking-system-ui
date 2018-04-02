@@ -88,7 +88,7 @@ export class GameSubmissionPageComponent implements OnInit {
       .do(
         success => {
           this.notificationService.notify('Your game has been submitted!');
-
+          this.form.reset();
           this.router.navigate(['/leaderboards']);
         },
         error => this.notificationService.notify('Something went wrong submitting your game.')
