@@ -1,8 +1,10 @@
 .leaderboards {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .leaderboard {
   flex: 1;
   padding: 1em;
+  flex-basis: 300px;
 }
