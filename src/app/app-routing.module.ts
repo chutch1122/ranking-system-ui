@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { GameSubmissionPageComponent } from "./game-submission-page/game-submission-page.component";
 import { LeaderboardPageComponent } from "./leaderboard-page/leaderboard-page.component";
+import { PlayerSubmissionComponent } from "./player-submission/player-submission.component";
 
 const routes: Routes = [
   {
@@ -15,6 +16,10 @@ const routes: Routes = [
   {
     path: 'games/create',
     component: GameSubmissionPageComponent
+  },
+  {
+    path: 'players/create',
+    component: PlayerSubmissionComponent
   }
 ];
 

@@ -25,6 +25,12 @@
         <mat-cell *matCellDef="let element"> {{element.rating}} </mat-cell>
       </ng-container>
 
+      <!-- Delta Column -->
+      <ng-container matColumnDef="delta">
+        <mat-header-cell *matHeaderCellDef> Delta </mat-header-cell>
+        <mat-cell *matCellDef="let element" [ngClass]="{'positive' : element.delta > -1, 'negative' : element.delta < 0}"> {{element.delta}} </mat-cell>
+      </ng-container>
+
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

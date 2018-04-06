@@ -37,18 +37,20 @@ export class LeaderboardComponent implements OnInit {
       let playerName = player.firstName + ' ' + player.lastName;
       let ratingIndex = player.ratings.map(x => x.game).indexOf(this.game.enum);
       let rating = player.ratings[ratingIndex].rating;
+      let delta = player.ratings[ratingIndex].delta;
 
       this.data.push({
         rank: i + 1,
         playerId: player.id,
         name: playerName,
-        rating: rating
+        rating: rating,
+        delta: delta
       });
     }
   }
 
   data: LeaderboardRow[];
-  displayedColumns = ['rank', 'name', 'rating'];
+  displayedColumns = ['rank', 'name', 'rating', 'delta'];
 
   constructor() {
   }
@@ -62,4 +64,5 @@ export class LeaderboardRow {
   playerId: number;
   name: string;
   rating: number;
+  delta: number;
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import "rxjs/add/operator/do";
 import { Router } from "@angular/router";
+import "rxjs/add/operator/do";
 import { GameService } from "../game.service";
 import { Foosball, GameType } from "../models/game-type.model";
 import { Player } from "../models/player.model";
@@ -28,7 +28,7 @@ export class GameSubmissionPageComponent implements OnInit {
   constructor(private playerService: PlayerService,
               private gameService: GameService,
               private notificationService: NotificationService,
-              private router:Router) {
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -67,7 +67,7 @@ export class GameSubmissionPageComponent implements OnInit {
     ]);
 
     if (!this.form.valid) {
-      this.notificationService.notify('Please fill out all required fields.');
+      this.notificationService.notify('Please fill out all required fields before submitting.');
       return;
     }
 
@@ -75,6 +75,10 @@ export class GameSubmissionPageComponent implements OnInit {
       this.notificationService.notify('Please enter four distinct players in the form.');
       console.log(players);
       return;
+    }
+
+    if(this.gameControl.value ){
+
     }
 
     let request: SubmitGameRequest = {

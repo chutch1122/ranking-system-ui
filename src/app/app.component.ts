@@ -9,6 +9,6 @@ export class AppComponent {
   tabs = [
     {label: 'Leaderboards', link: '/leaderboards'},
     {label: 'Game Submission', link: '/games/create'},
-    // {label: 'Player Registration', link: '/players/create'},
+    {label: 'Player Registration', link: '/players/create'},
   ];
 }

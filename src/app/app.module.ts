@@ -23,6 +23,7 @@ import { LeaderboardPageComponent } from "./leaderboard-page/leaderboard-page.co
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { NotificationService } from "./notification.service";
 import { PlayerService } from "./player.service";
+import { PlayerSubmissionComponent } from './player-submission/player-submission.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { PlayerService } from "./player.service";
     AppComponent,
     GameSubmissionPageComponent,
     LeaderboardPageComponent,
-    LeaderboardComponent
+    LeaderboardComponent,
+    PlayerSubmissionComponent
   ],
   imports: [
     AppRoutingModule,
