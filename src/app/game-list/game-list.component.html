@@ -8,15 +8,25 @@
           <div class="player-entry">{{ getFullName(game.teamA[0]) }}</div>
           <div class="player-rating"><app-numeric-stoplight [value]="getRatingDelta(game.teamA[0])"></app-numeric-stoplight></div>
           <div class="spacer"></div>
+          <div class="caption">WINNERS</div>
+          <div class="spacer"></div>
           <div class="player-rating"><app-numeric-stoplight [value]="getRatingDelta(game.teamA[1])"></app-numeric-stoplight></div>
           <div class="player-entry">{{ getFullName(game.teamA[1]) }}</div>
         </div>
 
-        <div class="game-list--vs">vs.</div>
+        <div class="game-list--vs">
+          <div class="spacer"></div>
+          <span class="line"></span>
+          vs
+          <span class="line"></span>
+          <div class="spacer"></div>
+        </div>
 
         <div class="game-list--row">
           <div class="player-entry">{{ getFullName(game.teamB[0]) }}</div>
           <div class="player-rating"><app-numeric-stoplight [value]="getRatingDelta(game.teamB[0])"></app-numeric-stoplight></div>
+          <div class="spacer"></div>
+          <div class="caption">LOSERS</div>
           <div class="spacer"></div>
           <div class="player-rating"><app-numeric-stoplight [value]="getRatingDelta(game.teamB[1])"></app-numeric-stoplight></div>
           <div class="player-entry">{{ getFullName(game.teamB[1]) }}</div>
