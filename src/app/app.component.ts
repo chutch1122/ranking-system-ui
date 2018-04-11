@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   tabs = [
     {label: 'Leaderboards', link: '/leaderboards'},
+    {label: 'Recent Games', link: '/games'},
     {label: 'Game Submission', link: '/games/create'},
     {label: 'Player Registration', link: '/players/create'},
   ];

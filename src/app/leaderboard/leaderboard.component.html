@@ -28,7 +28,7 @@
       <!-- Delta Column -->
       <ng-container matColumnDef="delta">
         <mat-header-cell *matHeaderCellDef> Delta </mat-header-cell>
-        <mat-cell *matCellDef="let element" [ngClass]="{'positive' : element.delta > -1, 'negative' : element.delta < 0}"> {{element.delta}} </mat-cell>
+        <mat-cell *matCellDef="let element"> <app-numeric-stoplight [value]="element.delta"></app-numeric-stoplight> </mat-cell>
       </ng-container>
 
 

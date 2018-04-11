@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { GameSubmissionPageComponent } from "./game-submission-page/game-submission-page.component";
 import { LeaderboardPageComponent } from "./leaderboard-page/leaderboard-page.component";
 import { PlayerSubmissionComponent } from "./player-submission/player-submission.component";
+import { RecentGamesPageComponent } from "./recent-games-page/recent-games-page.component";
 
 const routes: Routes = [
   {
@@ -14,13 +15,17 @@ const routes: Routes = [
     component: LeaderboardPageComponent
   },
   {
+    path: 'games',
+    component: RecentGamesPageComponent
+  },
+  {
     path: 'games/create',
     component: GameSubmissionPageComponent
   },
   {
     path: 'players/create',
     component: PlayerSubmissionComponent
-  }
+  },
 ];
 
 @NgModule({

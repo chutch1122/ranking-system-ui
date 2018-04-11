@@ -24,6 +24,9 @@ import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { NotificationService } from "./notification.service";
 import { PlayerService } from "./player.service";
 import { PlayerSubmissionComponent } from './player-submission/player-submission.component';
+import { GameListComponent } from './game-list/game-list.component';
+import { RecentGamesPageComponent } from './recent-games-page/recent-games-page.component';
+import { NumericStoplightComponent } from './numeric-stoplight/numeric-stoplight.component';
 
 
 @NgModule({
@@ -32,7 +35,10 @@ import { PlayerSubmissionComponent } from './player-submission/player-submission
     GameSubmissionPageComponent,
     LeaderboardPageComponent,
     LeaderboardComponent,
-    PlayerSubmissionComponent
+    PlayerSubmissionComponent,
+    GameListComponent,
+    RecentGamesPageComponent,
+    NumericStoplightComponent
   ],
   imports: [
     AppRoutingModule,
