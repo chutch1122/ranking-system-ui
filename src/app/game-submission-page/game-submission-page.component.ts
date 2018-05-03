@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import "rxjs/add/operator/do";
 import { GameService } from "../game.service";
-import { Foosball, GameType } from "../models/game-type.model";
+import { GAME_TYPES } from "../models/game-type.model";
 import { Player } from "../models/player.model";
 import { NotificationService } from "../notification.service";
 import { PlayerService } from "../player.service";
@@ -15,6 +15,8 @@ import { SubmitGameRequest } from "../requests/submit-game.request";
   styleUrls: ['./game-submission-page.component.scss']
 })
 export class GameSubmissionPageComponent implements OnInit {
+  gameTypes = GAME_TYPES;
+
   players: Player[];
   winningTeamPlayer1: FormControl;
   winningTeamPlayer2: FormControl;
@@ -22,8 +24,6 @@ export class GameSubmissionPageComponent implements OnInit {
   losingTeamPlayer2: FormControl;
   gameControl: FormControl;
   form: FormGroup;
-
-  games: GameType[] = GameService.GAME_TYPES;
 
   constructor(private playerService: PlayerService,
               private gameService: GameService,

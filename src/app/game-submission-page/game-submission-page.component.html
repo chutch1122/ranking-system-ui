@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card class="page-with-content">
   <mat-card-content>
     <h1>Game Submission</h1>
     <form>
@@ -6,7 +6,7 @@
       <h3>Sport</h3>
       <mat-form-field>
         <mat-select [formControl]="gameControl" placeholder="Select a game">
-          <mat-option *ngFor="let game of games" [value]="game.enum">{{game.name}}
+          <mat-option *ngFor="let game of gameTypes" [value]="game">{{game | gameType}}
           </mat-option>
         </mat-select>
       </mat-form-field>

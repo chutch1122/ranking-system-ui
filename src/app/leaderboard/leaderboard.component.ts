@@ -15,15 +15,15 @@ export class LeaderboardComponent implements OnInit {
     let filtered = data.filter(x => {
       let matching = x.ratings
         .map(x => x.game)
-        .filter(x => x === this.game.enum);
+        .filter(x => x === this.game);
 
       return matching.length === 1;
     });
 
     let sorted: Player[] = filtered
       .sort((a, b) => {
-        let aIndex = a.ratings.map(x => x.game).indexOf(this.game.enum);
-        let bIndex = b.ratings.map(x => x.game).indexOf(this.game.enum);
+        let aIndex = a.ratings.map(x => x.game).indexOf(this.game);
+        let bIndex = b.ratings.map(x => x.game).indexOf(this.game);
 
         let aRating = a.ratings[aIndex].rating;
         let bRating = b.ratings[bIndex].rating;
@@ -35,7 +35,7 @@ export class LeaderboardComponent implements OnInit {
     for (let i = 0; i < sorted.length; i++) {
       let player = sorted[i];
       let playerName = player.firstName + ' ' + player.lastName;
-      let ratingIndex = player.ratings.map(x => x.game).indexOf(this.game.enum);
+      let ratingIndex = player.ratings.map(x => x.game).indexOf(this.game);
       let rating = player.ratings[ratingIndex].rating;
       let delta = player.ratings[ratingIndex].delta;
 

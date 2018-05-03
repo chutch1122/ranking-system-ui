@@ -1,12 +1,24 @@
 <div class="game-lists">
-  <app-game-list
-    class="game-list"
-    [type]="games[0]"
-    [games]="foosballGames"
-  ></app-game-list>
-  <app-game-list
-    class="game-list"
-    [type]="games[1]"
-    [games]="pingpongGames"
-  ></app-game-list>
+  <div class="game-list">
+    <mat-card>
+      <mat-card-content>
+        <h1>{{ gameTypes[0] | gameType }}</h1>
+        <app-game-list
+          [type]="gameTypes[0]"
+          [games]="foosballGames"
+        ></app-game-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="game-list">
+    <mat-card>
+      <mat-card-content>
+        <h1>{{ gameTypes[1] | gameType }}</h1>
+        <app-game-list
+          [type]="gameTypes[1]"
+          [games]="pingpongGames"
+        ></app-game-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

@@ -1,14 +1,6 @@
-export interface GameType {
-  enum: string;
-  name: string;
+export enum GameType {
+  FOOSBALL = 'FOOSBALL',
+  PINGPONG = 'PINGPONG',
 }
 
-export class Foosball implements GameType{
-  enum = 'FOOSBALL';
-  name = 'Foosball';
-}
-
-export class PingPong implements GameType{
-  enum = 'PINGPONG';
-  name = 'Ping Pong';
-}
+export const GAME_TYPES:GameType[] = [GameType.FOOSBALL, GameType.PINGPONG];

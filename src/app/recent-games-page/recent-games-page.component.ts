@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import "rxjs/add/operator/do";
 import { GameService } from "../game.service";
-import { Foosball, GameType, PingPong } from "../models/game-type.model";
+import { GAME_TYPES, GameType } from "../models/game-type.model";
 import { Game } from "../models/game.model";
 
 @Component({
@@ -10,7 +10,8 @@ import { Game } from "../models/game.model";
   styleUrls: ['./recent-games-page.component.scss']
 })
 export class RecentGamesPageComponent implements OnInit {
-  games: GameType[] = GameService.GAME_TYPES;
+  gameTypes = GAME_TYPES;
+
   foosballGames: Game[] = [];
   pingpongGames: Game[] = [];
 
@@ -18,10 +19,10 @@ export class RecentGamesPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.gameService.recent(new Foosball())
+    this.gameService.recent(GameType.FOOSBALL)
       .do(x => this.foosballGames = x)
       .subscribe();
-    this.gameService.recent(new PingPong())
+    this.gameService.recent(GameType.PINGPONG)
       .do(x => this.pingpongGames = x)
       .subscribe();
   }

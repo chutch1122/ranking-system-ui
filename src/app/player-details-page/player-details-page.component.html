@@ -1,0 +1,40 @@
+<mat-card class="page-with-content">
+  <h1>{{ player?.firstName }} {{ player?.lastName }}</h1>
+</mat-card>
+
+<div class="page-with-content stats-and-history" *ngIf="player">
+  <mat-card>
+    <mat-card-content>
+      <div style="width: 100%; height: 400px;">
+        <app-player-rating-graph
+          [aggregatedRatings]="aggregatedRatings"
+        ></app-player-rating-graph>
+      </div>
+
+      <div *ngIf="hasRating(gameType.FOOSBALL)">
+        <h3>Foosball</h3>
+        <p><strong>Rating: </strong> {{getRating(gameType.FOOSBALL)}}</p>
+        <p><strong>Win/Loss: </strong> {{getWinLoss(foosballGames)}}</p>
+      </div>
+
+      <div *ngIf="hasRating(gameType.PINGPONG)">
+        <h3>Ping Pong</h3>
+        <p><strong>Rating: </strong> {{getRating(gameType.PINGPONG)}}</p>
+        <p><strong>Win/Loss:</strong> {{getWinLoss(pingpongGames)}}</p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-content>
+      <mat-tab-group>
+        <mat-tab *ngFor="let type of gameTypes" label="{{ type | gameType }}">
+          <app-game-list
+            [type]="type"
+            [games]="getGamesForType(type)"
+          ></app-game-list>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+</div>

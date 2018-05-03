@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import "rxjs/add/operator/do";
-import { GameService } from "../game.service";
-import { GameType } from "../models/game-type.model";
+import { GAME_TYPES } from "../models/game-type.model";
 import { Player } from "../models/player.model";
 import { PlayerService } from "../player.service";
 
@@ -11,7 +10,8 @@ import { PlayerService } from "../player.service";
   styleUrls: ['./leaderboard-page.component.scss']
 })
 export class LeaderboardPageComponent implements OnInit {
-  games: GameType[] = GameService.GAME_TYPES;
+  gameTypes = GAME_TYPES;
+
   players: Player[] = [];
 
   constructor(private playerService: PlayerService) {

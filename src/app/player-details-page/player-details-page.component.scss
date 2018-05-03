@@ -1,0 +1,11 @@
+.stats-and-history {
+  display: flex;
+
+  mat-card {
+    flex: 1;
+  }
+
+  mat-card:first-of-type {
+    margin-right: 1em;
+  }
+}

@@ -7,4 +7,8 @@
   flex: 1;
   padding: 1em;
   flex-basis: 300px;
+
+  &:last-of-type {
+    padding-left: 0;
+  }
 }

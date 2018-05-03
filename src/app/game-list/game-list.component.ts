@@ -17,6 +17,6 @@ export class GameListComponent {
   }
 
   getRatingDelta(player:Player): number {
-    return player.ratings.filter(x => x.game === this.type.enum)[0].delta;
+    return player.ratings.filter(x => x.game === this.type)[0].delta;
   }
 }
