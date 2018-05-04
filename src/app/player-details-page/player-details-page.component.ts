@@ -57,6 +57,7 @@ export class PlayerDetailsPageComponent implements OnInit {
       .switchMap((params: ParamMap) => {
         return this.gameService.findByPlayerId(+params.get('id'));
       })
+      .do(games => games.reverse())
       .do(games => {
         this.foosballGames = games.filter(game => game.gameType == GameType.FOOSBALL);
         this.pingpongGames = games.filter(game => game.gameType == GameType.PINGPONG);
