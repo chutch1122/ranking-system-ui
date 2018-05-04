@@ -1,13 +1,26 @@
 <div class="game-list--container">
   <div class="game-list--item" *ngFor="let game of games">
     <div class="game-list--row">
-      <div class="player-entry">{{ getFullName(game.teamA[0]) }}</div>
-      <div class="player-rating"><app-numeric-stoplight [value]="getRatingDelta(game.teamA[0])"></app-numeric-stoplight></div>
+      <div class="player-entry">
+        <a href="/players/{{game.teamA[0].id}}">
+          {{ getFullName(game.teamA[0]) }}
+        </a>
+      </div>
+      <div class="player-rating">
+        <app-numeric-stoplight [value]="getRatingDelta(game.teamA[0])"></app-numeric-stoplight>
+      </div>
       <div class="spacer"></div>
       <div class="caption">VICTORY</div>
       <div class="spacer"></div>
-      <div class="player-rating"><app-numeric-stoplight [value]="getRatingDelta(game.teamA[1])"></app-numeric-stoplight></div>
-      <div class="player-entry">{{ getFullName(game.teamA[1]) }}</div>
+      <div class="player-rating">
+        <app-numeric-stoplight [value]="getRatingDelta(game.teamA[1])"></app-numeric-stoplight>
+      </div>
+
+      <div class="player-entry">
+        <a href="/players/{{game.teamA[1].id}}">
+          {{ getFullName(game.teamA[1]) }}
+        </a>
+      </div>
     </div>
 
     <div class="game-list--vs">
@@ -19,13 +32,25 @@
     </div>
 
     <div class="game-list--row">
-      <div class="player-entry">{{ getFullName(game.teamB[0]) }}</div>
-      <div class="player-rating"><app-numeric-stoplight [value]="getRatingDelta(game.teamB[0])"></app-numeric-stoplight></div>
+      <div class="player-entry">
+        <a href="/players/{{game.teamB[0].id}}">
+          {{ getFullName(game.teamB[0]) }}
+        </a>
+      </div>
+      <div class="player-rating">
+        <app-numeric-stoplight [value]="getRatingDelta(game.teamB[0])"></app-numeric-stoplight>
+      </div>
       <div class="spacer"></div>
       <div class="caption">DEFEAT</div>
       <div class="spacer"></div>
-      <div class="player-rating"><app-numeric-stoplight [value]="getRatingDelta(game.teamB[1])"></app-numeric-stoplight></div>
-      <div class="player-entry">{{ getFullName(game.teamB[1]) }}</div>
+      <div class="player-rating">
+        <app-numeric-stoplight [value]="getRatingDelta(game.teamB[1])"></app-numeric-stoplight>
+      </div>
+      <div class="player-entry">
+        <a href="/players/{{game.teamB[1].id}}">
+          {{ getFullName(game.teamB[1]) }}
+        </a>
+      </div>
     </div>
   </div>
 </div>
