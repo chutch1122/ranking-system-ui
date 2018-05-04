@@ -1,6 +1,6 @@
-<mat-card class="page-with-content">
+<div class="page-with-content mat-title">
   <h1>{{ player?.firstName }} {{ player?.lastName }}</h1>
-</mat-card>
+</div>
 
 <div class="page-with-content stats-and-history" *ngIf="player">
   <mat-card>
@@ -28,12 +28,14 @@
   <mat-card>
     <mat-card-content>
       <mat-tab-group>
-        <mat-tab *ngFor="let type of gameTypes" label="{{ type | gameType }}">
-          <app-game-list
-            [type]="type"
-            [games]="getGamesForType(type)"
-          ></app-game-list>
-        </mat-tab>
+        <div *ngFor="let type of gameTypes">
+          <mat-tab label="{{ type | gameType }}" *ngIf="hasRating(type)">
+            <app-game-list
+              [type]="type"
+              [games]="getGamesForType(type)"
+            ></app-game-list>
+          </mat-tab>
+        </div>
       </mat-tab-group>
     </mat-card-content>
   </mat-card>
