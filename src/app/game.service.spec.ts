@@ -1,4 +1,9 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { inject, TestBed } from '@angular/core/testing';
+import "rxjs/add/observable/of";
+import "rxjs/add/operator/combineLatest";
+import "rxjs/add/operator/do";
+import "rxjs/add/operator/finally";
+import "rxjs/add/operator/zip";
 
 import { GameService } from './game.service';
 

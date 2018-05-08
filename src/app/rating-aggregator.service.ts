@@ -51,22 +51,18 @@ export class RatingAggregatorService {
 
       if (todayRatings.length == 0) {
         if (lastRating != null) {
-          let newDateString = moment.utc(lastRating.createdOn).add(1, 'days').toISOString();
+          let newDateString = date.toISOString();
           lastRating = {
             game: lastRating.game,
             rating: lastRating.rating,
             delta: lastRating.delta,
             createdOn: newDateString.substr(0, newDateString.indexOf('.'))
           };
-
           result.push(lastRating);
         }
-
-
         continue;
       }
 
-      // TODO: Write test around grabbing the last game of the day
       lastRating = todayRatings[todayRatings.length - 1];
       result.push(lastRating);
     }

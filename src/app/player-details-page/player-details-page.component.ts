@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from "@angular/router";
+import "rxjs/add/observable/combineLatest";
 import "rxjs/add/observable/merge";
 import "rxjs/add/observable/zip";
 import "rxjs/add/operator/do";
@@ -77,7 +78,7 @@ export class PlayerDetailsPageComponent implements OnInit {
     return wins + "/" + games.length + " (" + (percentile * 100).toFixed(2) + "%)";
   }
 
-  getRating(gameType:GameType): number {
+  getRating(gameType: GameType): number {
     let matching = this.player.ratings.filter(x => x.game == gameType);
 
     if (matching.length == 0) return 0;
@@ -85,7 +86,7 @@ export class PlayerDetailsPageComponent implements OnInit {
     return matching[0].rating;
   }
 
-  hasRating(gameType:GameType):boolean {
+  hasRating(gameType: GameType): boolean {
     return this.player.ratings.filter(x => x.game == gameType).length != 0;
   }
 
