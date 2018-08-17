@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
-import { Rating } from "./models/rating.model";
+import { Rating } from './models/rating.model';
 
 type Moment = moment.Moment;
 
@@ -11,13 +11,13 @@ export class RatingAggregatorService {
   }
 
   aggregate(type: string, ...gameRatingSets: Rating[][]): AggregatedRatings {
-    let dates = this.getDistinctDates(gameRatingSets);
+    const dates = this.getDistinctDates(gameRatingSets);
 
-    let foosballRatings = gameRatingSets[0];
-    let pingPongRatings = gameRatingSets[1];
+    const foosballRatings = gameRatingSets[0];
+    const pingPongRatings = gameRatingSets[1];
 
-    let resultingFoosballRatings = this.fillRatingsForGame(dates, foosballRatings);
-    let resultingPingPongRatings = this.fillRatingsForGame(dates, pingPongRatings);
+    const resultingFoosballRatings = this.fillRatingsForGame(dates, foosballRatings);
+    const resultingPingPongRatings = this.fillRatingsForGame(dates, pingPongRatings);
 
     return {
       foosball: resultingFoosballRatings,
@@ -26,15 +26,17 @@ export class RatingAggregatorService {
   }
 
   private fillRatingsForGame(dates: Moment[], ratings: Rating[]) {
-    if (ratings.length == 0) return [];
+    if (ratings.length === 0) {
+      return [];
+    }
 
-    let result: Rating[] = [];
-    let lastDateForRatings: Moment = moment.utc(ratings[ratings.length - 1].createdOn);
+    const result: Rating[] = [];
+    const lastDateForRatings: Moment = moment.utc(ratings[ratings.length - 1].createdOn);
 
     let lastRating: Rating = null;
-    for (let date of dates) {
+    for (const date of dates) {
       if (date.isAfter(lastDateForRatings)) {
-        let newDateString = date.toISOString();
+        const newDateString = date.toISOString();
 
         lastRating = {
           game: lastRating.game,
@@ -47,11 +49,11 @@ export class RatingAggregatorService {
         continue;
       }
 
-      let todayRatings: Rating[] = ratings.filter((value) => moment.utc(value.createdOn).isSame(date));
+      const todayRatings: Rating[] = ratings.filter((value) => moment.utc(value.createdOn).isSame(date));
 
-      if (todayRatings.length == 0) {
+      if (todayRatings.length === 0) {
         if (lastRating != null) {
-          let newDateString = date.toISOString();
+          const newDateString = date.toISOString();
           lastRating = {
             game: lastRating.game,
             rating: lastRating.rating,
@@ -71,9 +73,9 @@ export class RatingAggregatorService {
   }
 
   private getDistinctDates(gameRatingSets: Rating[][]) {
-    let datesSet: Set<string> = new Set<string>();
+    const datesSet: Set<string> = new Set<string>();
 
-    for (let ratingSet of gameRatingSets) {
+    for (const ratingSet of gameRatingSets) {
       ratingSet.forEach(x => datesSet.add(x.createdOn));
     }
 

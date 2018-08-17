@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
-import { Player } from "../models/player.model";
-import { NotificationService } from "../notification.service";
-import { PlayerService } from "../player.service";
-import { SubmitPlayerRequest } from "../requests/submit-player.request";
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Player } from '../models/player.model';
+import { NotificationService } from '../notification.service';
+import { PlayerService } from '../player.service';
+import { SubmitPlayerRequest } from '../requests/submit-player.request';
 
 @Component({
   selector: 'app-player-submission',
@@ -42,9 +42,15 @@ export class PlayerSubmissionComponent implements OnInit {
       return;
     }
 
-    if (this.checkForMeme('leeroy', 'jenkins', 'Really?')) return;
-    if (this.checkForMeme('a', 'cat', 'meow')) return;
-    if (this.checkForMeme('a', 'dog', 'woof woof bork bork')) return;
+    if (this.checkForMeme('leeroy', 'jenkins', 'Really?')) {
+      return;
+    }
+    if (this.checkForMeme('a', 'cat', 'meow')) {
+      return;
+    }
+    if (this.checkForMeme('a', 'dog', 'woof woof bork bork')) {
+      return;
+    }
 
     if (this.existingPlayers.filter(
       x => x.firstName === this.firstNameControl.value
@@ -54,7 +60,7 @@ export class PlayerSubmissionComponent implements OnInit {
       return;
     }
 
-    let request: SubmitPlayerRequest = {
+    const request: SubmitPlayerRequest = {
       firstName: this.firstNameControl.value,
       lastName: this.lastNameControl.value
     };
@@ -71,8 +77,9 @@ export class PlayerSubmissionComponent implements OnInit {
       .subscribe();
   }
 
-  private checkForMeme(first:string, last:String, message:string): boolean {
-    if (this.firstNameControl.value.toLowerCase() === first.toLowerCase() && this.lastNameControl.value.toLowerCase() === last.toLowerCase()) {
+  private checkForMeme(first: string, last: String, message: string): boolean {
+    if (this.firstNameControl.value.toLowerCase() === first.toLowerCase()
+      && this.lastNameControl.value.toLowerCase() === last.toLowerCase()) {
       this.notificationService.notify(message);
       return true;
     }

@@ -1,4 +1,4 @@
-import { GameType } from "./game-type.model";
+import { GameType } from './game-type.model';
 
 export interface Rating {
   game: GameType;

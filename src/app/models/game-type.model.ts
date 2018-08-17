@@ -3,4 +3,4 @@ export enum GameType {
   PINGPONG = 'PINGPONG',
 }
 
-export const GAME_TYPES:GameType[] = [GameType.FOOSBALL, GameType.PINGPONG];
+export const GAME_TYPES: GameType[] = [GameType.FOOSBALL, GameType.PINGPONG];

@@ -11,7 +11,9 @@ export class Optional<T> {
   }
 
   get(): T {
-    if (this.item == null) throw null;
+    if (this.item == null) {
+      throw null;
+    }
 
     return this.item;
   }
@@ -21,7 +23,9 @@ export class Optional<T> {
   }
 
   ifPresent(callback: (value: T) => void): void {
-    if (this.item == null) return;
+    if (this.item == null) {
+      return;
+    }
 
     callback(this.item);
   }

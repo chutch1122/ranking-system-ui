@@ -6,9 +6,9 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./numeric-stoplight.component.scss']
 })
 export class NumericStoplightComponent {
-  @Input() value:number;
+  @Input() value: number;
 
-  get isPositive():boolean {
+  get isPositive(): boolean {
     return this.value > -1;
   }
 }

@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import * as moment from "moment";
-import { GameTypePipe } from "../game-type.pipe";
-import { Optional } from "../helpers";
-import { GameType } from "../models/game-type.model";
-import { Rating } from "../models/rating.model";
-import { SeriesEntry } from "../models/series-entry.model";
-import { AggregatedRatings } from "../rating-aggregator.service";
+import * as moment from 'moment';
+import { GameTypePipe } from '../game-type.pipe';
+import { Optional } from '../helpers';
+import { GameType } from '../models/game-type.model';
+import { Rating } from '../models/rating.model';
+import { SeriesEntry } from '../models/series-entry.model';
+import { AggregatedRatings } from '../rating-aggregator.service';
 
 @Component({
   selector: 'app-player-rating-graph',
@@ -23,8 +23,8 @@ export class PlayerRatingGraphComponent implements OnInit {
   }
 
   data: any;
-  xAxisLabel = "Date";
-  yAxisLabel = "Rating";
+  xAxisLabel = 'Date';
+  yAxisLabel = 'Rating';
 
   constructor(private gameTypePipe: GameTypePipe) {
   }
@@ -33,7 +33,7 @@ export class PlayerRatingGraphComponent implements OnInit {
   }
 
   private buildDataObject(aggregatedRatings: AggregatedRatings): any[] {
-    let result = [];
+    const result = [];
 
     this.buildSeriesIfPresent(aggregatedRatings.foosball, GameType.FOOSBALL).ifPresent(x => result.push(x));
     this.buildSeriesIfPresent(aggregatedRatings.pingpong, GameType.PINGPONG).ifPresent(x => result.push(x));
@@ -42,11 +42,13 @@ export class PlayerRatingGraphComponent implements OnInit {
   }
 
   private buildSeriesIfPresent(ratings: Rating[], gameType: GameType): Optional<any> {
-    if (ratings.length == 0) return Optional.empty();
+    if (ratings.length === 0) {
+      return Optional.empty();
+    }
 
     return Optional.of({
-      "name": this.gameTypePipe.transform(gameType),
-      "series": ratings.map(x => <SeriesEntry>{
+      'name': this.gameTypePipe.transform(gameType),
+      'series': ratings.map(x => <SeriesEntry>{
         name: moment.utc(x.createdOn).format('MM-DD-YYYY'),
         value: x.rating
       })

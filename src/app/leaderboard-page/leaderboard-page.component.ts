@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import "rxjs/add/operator/do";
-import { GAME_TYPES } from "../models/game-type.model";
-import { Player } from "../models/player.model";
-import { PlayerService } from "../player.service";
+import 'rxjs/add/operator/do';
+import { GAME_TYPES } from '../models/game-type.model';
+import { Player } from '../models/player.model';
+import { PlayerService } from '../player.service';
 
 @Component({
   selector: 'app-leaderboard-page',

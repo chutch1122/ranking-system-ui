@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import "rxjs/add/operator/do";
-import { GameService } from "../game.service";
-import { GAME_TYPES, GameType } from "../models/game-type.model";
-import { Game } from "../models/game.model";
+import 'rxjs/add/operator/do';
+import { GameService } from '../game.service';
+import { GAME_TYPES, GameType } from '../models/game-type.model';
+import { Game } from '../models/game.model';
 
 @Component({
   selector: 'app-recent-games-page',

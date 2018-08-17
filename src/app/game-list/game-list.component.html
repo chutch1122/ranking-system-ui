@@ -1,5 +1,5 @@
 <div class="game-list--container">
-  <div class="game-list--item" *ngFor="let game of games">
+  <div class="game-list--item" *ngFor="let game of pagedGames">
     <div class="game-list--row">
       <div class="player-entry">
         <a href="/players/{{game.teamA[0].id}}">
@@ -53,4 +53,8 @@
       </div>
     </div>
   </div>
+  <mat-paginator [pageSizeOptions]="pageSizes"
+                 [length]="games.length"
+                 (page)="onPageChanged($event)">
+  </mat-paginator>
 </div>

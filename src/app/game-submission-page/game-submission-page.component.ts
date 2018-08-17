@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
-import "rxjs/add/operator/do";
-import { GameService } from "../game.service";
-import { GAME_TYPES } from "../models/game-type.model";
-import { Player } from "../models/player.model";
-import { NotificationService } from "../notification.service";
-import { PlayerService } from "../player.service";
-import { SubmitGameRequest } from "../requests/submit-game.request";
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import 'rxjs/add/operator/do';
+import { GameService } from '../game.service';
+import { GAME_TYPES } from '../models/game-type.model';
+import { Player } from '../models/player.model';
+import { NotificationService } from '../notification.service';
+import { PlayerService } from '../player.service';
+import { SubmitGameRequest } from '../requests/submit-game.request';
 
 @Component({
   selector: 'app-game-submission-page',
@@ -49,8 +49,8 @@ export class GameSubmissionPageComponent implements OnInit {
     this.playerService.all()
       .do(x => {
         this.players = x.sort((a, b) => {
-          let aName = a.firstName + ' ' + a.lastName;
-          let bName = b.firstName + ' ' + b.lastName;
+          const aName = a.firstName + ' ' + a.lastName;
+          const bName = b.firstName + ' ' + b.lastName;
 
           return aName.localeCompare(bName);
         });
@@ -59,7 +59,7 @@ export class GameSubmissionPageComponent implements OnInit {
   }
 
   submit() {
-    let players = new Set([
+    const players = new Set([
       this.winningTeamPlayer1.value,
       this.winningTeamPlayer2.value,
       this.losingTeamPlayer1.value,
@@ -71,17 +71,13 @@ export class GameSubmissionPageComponent implements OnInit {
       return;
     }
 
-    if (players.size != 4) {
+    if (players.size !== 4) {
       this.notificationService.notify('Please enter four distinct players in the form.');
       console.log(players);
       return;
     }
 
-    if(this.gameControl.value ){
-
-    }
-
-    let request: SubmitGameRequest = {
+    const request: SubmitGameRequest = {
       gameType: this.gameControl.value,
       teamA: [this.winningTeamPlayer1.value, this.winningTeamPlayer2.value],
       teamB: [this.losingTeamPlayer1.value, this.losingTeamPlayer2.value],
