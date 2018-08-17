@@ -11,11 +11,12 @@ import { PageEvent } from '@angular/material';
 })
 export class GameListComponent {
   @Input() type: GameType;
-
   @Input() set games(value: Game[]) {
     this._games = value;
     this.pagedGames = value.slice(0, this.pageSizes[0]);
   }
+
+  @Input() playerId: number;
 
   get games() {
     return this._games;
@@ -37,5 +38,13 @@ export class GameListComponent {
   onPageChanged(event: PageEvent): void {
     const startIndex = event.pageIndex * event.pageSize;
     this.pagedGames = this.games.slice(startIndex, startIndex + event.pageSize);
+  }
+
+  isWin(index: number): boolean {
+    return this.playerId && this.pagedGames[index].teamA.map(x => x.id).some(x => x === this.playerId);
+  }
+
+  isLoss(index: number): boolean {
+    return this.playerId && this.pagedGames[index].teamB.map(x => x.id).some(x => x === this.playerId);
   }
 }

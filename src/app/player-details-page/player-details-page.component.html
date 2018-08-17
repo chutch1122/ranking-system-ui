@@ -51,6 +51,7 @@
         <div *ngFor="let type of gameTypes">
           <mat-tab label="{{ type | gameType }}" *ngIf="hasRating(type)">
             <app-game-list
+              [playerId]="player.id"
               [type]="type"
               [games]="getGamesForType(type)"
             ></app-game-list>
