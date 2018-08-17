@@ -11,7 +11,8 @@ import {
   MatSnackBarModule,
   MatTableModule,
   MatTabsModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatTooltipModule
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -38,6 +39,8 @@ import { PlayerSubmissionComponent } from './player-submission/player-submission
 import { PlayerService } from './player.service';
 import { RatingAggregatorService } from './rating-aggregator.service';
 import { RecentGamesPageComponent } from './recent-games-page/recent-games-page.component';
+import { StatsService } from './stats.service';
+import { MostPointsWonAgainstPipe } from './most-points-won-against.pipe';
 
 FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme);
 
@@ -55,6 +58,7 @@ FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme);
     PlayerDetailsPageComponent,
     GameTypePipe,
     PlayerRatingGraphComponent,
+    MostPointsWonAgainstPipe,
   ],
   imports: [
     AppRoutingModule,
@@ -75,6 +79,7 @@ FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme);
     NgxChartsModule,
     FusionChartsModule,
     MatPaginatorModule,
+    MatTooltipModule,
   ],
   providers: [
     NotificationService,
@@ -82,6 +87,8 @@ FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme);
     GameService,
     RatingAggregatorService,
     GameTypePipe,
+    StatsService,
+    MostPointsWonAgainstPipe,
   ],
   bootstrap: [AppComponent]
 })

@@ -15,12 +15,32 @@
         <h3>Foosball</h3>
         <p><strong>Rating: </strong> {{getRating(gameType.FOOSBALL)}}</p>
         <p><strong>Win Ratio: </strong> {{getWinLoss(foosballGames)}}</p>
+        <p>
+          <strong matTooltip="In games against you, this player has lost the most points." matTooltipPosition="right">
+            I {{ '' | mostPointsWonAgainstPipe }}:
+          </strong>
+          <span *ngIf="foosballMostPointsWonAgainst">
+          {{ foosballMostPointsWonAgainst.player.firstName }}
+          {{ foosballMostPointsWonAgainst.player.lastName[0] }}.
+          ({{ foosballMostPointsWonAgainst.stat }} points)
+          </span>
+        </p>
       </div>
 
       <div *ngIf="hasRating(gameType.PINGPONG)">
         <h3>Ping Pong</h3>
         <p><strong>Rating: </strong> {{getRating(gameType.PINGPONG)}}</p>
         <p><strong>Win Ratio:</strong> {{getWinLoss(pingpongGames)}}</p>
+        <p>
+          <strong matTooltip="In games against you, this player has lost the most points." matTooltipPosition="right">
+            I {{ '' | mostPointsWonAgainstPipe }}:
+          </strong>
+          <span *ngIf="pingpongMostPointsWonAgainst">
+          {{ pingpongMostPointsWonAgainst.player.firstName }}
+          {{ pingpongMostPointsWonAgainst.player.lastName[0] }}.
+          ({{ pingpongMostPointsWonAgainst.stat }} points)
+          </span>
+        </p>
       </div>
     </mat-card-content>
   </mat-card>

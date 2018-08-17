@@ -13,6 +13,8 @@ import { Game } from '../models/game.model';
 import { Player } from '../models/player.model';
 import { PlayerService } from '../player.service';
 import { AggregatedRatings, RatingAggregatorService } from '../rating-aggregator.service';
+import { PlayerStat, StatsService } from '../stats.service';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Component({
   selector: 'app-player-details-page',
@@ -28,11 +30,14 @@ export class PlayerDetailsPageComponent implements OnInit {
   pingpongGames: Game[] = [];
 
   aggregatedRatings: AggregatedRatings;
+  foosballMostPointsWonAgainst: PlayerStat<number>;
+  pingpongMostPointsWonAgainst: PlayerStat<number>;
 
   constructor(private route: ActivatedRoute,
               private playerService: PlayerService,
               private ratingAggregatorService: RatingAggregatorService,
-              private gameService: GameService) {
+              private gameService: GameService,
+              private statsService: StatsService) {
   }
 
   ngOnInit() {
@@ -52,6 +57,12 @@ export class PlayerDetailsPageComponent implements OnInit {
           this.aggregatedRatings = this.ratingAggregatorService.aggregate('day', x.foosballRatings, x.pingPongRatings);
         });
       })
+      .subscribe();
+
+    this.route.paramMap
+      .switchMap((params: ParamMap) => new BehaviorSubject(+params.get('id')))
+      .do(id => this.statsService.findMostPointsWonAgainst(id, GameType.FOOSBALL).subscribe((x) => this.foosballMostPointsWonAgainst = x))
+      .do(id => this.statsService.findMostPointsWonAgainst(id, GameType.PINGPONG).subscribe((x) => this.pingpongMostPointsWonAgainst = x))
       .subscribe();
 
     this.route.paramMap
