@@ -53,7 +53,8 @@
       </div>
     </div>
   </div>
-  <mat-paginator [pageSizeOptions]="pageSizes"
+  <mat-paginator *ngIf="games.length > pageSizes[0]"
+                 [pageSizeOptions]="pageSizes"
                  [length]="games.length"
                  (page)="onPageChanged($event)">
   </mat-paginator>
