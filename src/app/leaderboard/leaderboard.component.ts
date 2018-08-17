@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import 'rxjs/add/operator/do';
 import { GameType } from '../models/game-type.model';
 import { Player } from '../models/player.model';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-leaderboard',
@@ -12,13 +13,21 @@ export class LeaderboardComponent implements OnInit {
   @Input() game: GameType;
 
   @Input() set players(data: Player[]) {
-    const filtered = data.filter(x => {
-      const matching = x.ratings
-        .map(x => x.game)
-        .filter(x => x === this.game);
+    const filtered = data
+      .filter(x => {
+        const matching = x.ratings
+          .map(y => y.game)
+          .filter(y => y === this.game);
 
-      return matching.length === 1;
-    });
+        return matching.length === 1;
+      })
+      .filter(x => {
+        const twoMonthsAgo = moment().subtract(2, 'month');
+        const mostRecent = moment(x.ratings[0].createdOn);
+
+        return mostRecent.isAfter(twoMonthsAgo);
+      });
+
 
     const sorted: Player[] = filtered
       .sort((a, b) => {
