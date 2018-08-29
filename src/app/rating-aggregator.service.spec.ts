@@ -72,7 +72,7 @@ describe('RatingAggregatorService', () => {
         expect(result.pingpong).toEqual(expectedPingpongRatings);
       }));
 
-      fit('should fill in the gaps for both games', inject([RatingAggregatorService], (service: RatingAggregatorService) => {
+      it('should fill in the gaps for both games', inject([RatingAggregatorService], (service: RatingAggregatorService) => {
         const foosballRatings: Rating[] = [
           {game: GameType.FOOSBALL, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00'},
           {game: GameType.FOOSBALL, rating: 1100, delta: -1, createdOn: '2018-04-02T05:00:00'},
