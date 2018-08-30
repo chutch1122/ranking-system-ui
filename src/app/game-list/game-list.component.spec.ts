@@ -6,7 +6,7 @@ import {Player} from '../models/player.model';
 import {Rating} from '../models/rating.model';
 import {GameType} from '../models/game-type.model';
 
-describe('GameListComponent', () => {
+fdescribe('GameListComponent', () => {
   let component: GameListComponent;
   let fixture: ComponentFixture<GameListComponent>;
 
@@ -47,7 +47,7 @@ describe('GameListComponent', () => {
 
   describe('getRatingDelta', () => {
     it('should return a players delta', () => {
-
+      component.type = GameType.FOOSBALL;
 
       const rating: Rating = {
         game: GameType.FOOSBALL,
@@ -60,12 +60,12 @@ describe('GameListComponent', () => {
         id: 1,
         firstName: 'Bob',
         lastName: 'McFoosball',
-        ratings: [rating[0]]
+        ratings: [rating]
       };
 
       const delta = component.getRatingDelta(player);
 
-
+      expect(delta).toEqual(player.ratings[0].delta);
     });
   });
 });
