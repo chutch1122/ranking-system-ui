@@ -10,6 +10,7 @@ export class RatingAggregatorService {
   constructor() {
   }
 
+  //TODO: generify similar to player details page, using a map
   aggregate(type: string, ...gameRatingSets: Rating[][]): AggregatedRatings {
     const dates = this.getDistinctDates(gameRatingSets);
 
@@ -83,6 +84,7 @@ export class RatingAggregatorService {
   }
 }
 
+//TODO: Have this class contain a map<string, ratings[]>
 export class AggregatedRatings {
   foosball: Rating[];
   pingpong: Rating[];
