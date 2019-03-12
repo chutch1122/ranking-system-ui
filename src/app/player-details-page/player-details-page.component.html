@@ -11,7 +11,7 @@
         ></app-player-rating-graph>
       </div>
 
-      <div *ngFor="let type of typesPlayerHasGamesFor">
+      <div *ngFor="let type of getTypesPlayerHasGamesFor()">
         <app-game-type-details
           [gameType]="type"
           [rating]="getRating(type)"

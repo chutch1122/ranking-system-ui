@@ -1,8 +1,8 @@
 <div>
-  <h3>{{ type | gameType }}</h3>
+  <h3>{{ gameType | gameType }}</h3>
   <p><strong>Rating: </strong> {{rating}}</p>
   <p><strong>Win Ratio: </strong> {{getWinLoss(games)}}</p>
-  <p>
+  <p *ngIf="hasWins">
     <strong matTooltip="In games against you, this player has lost the most points." matTooltipPosition="right">
       I {{ '' | mostPointsWonAgainstPipe }}:
     </strong>

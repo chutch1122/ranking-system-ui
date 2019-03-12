@@ -20,9 +20,7 @@ import {AggregatedRatings, RatingAggregatorService} from '../rating-aggregator.s
   styleUrls: ['./player-details-page.component.scss']
 })
 export class PlayerDetailsPageComponent implements OnInit {
-  gameType = GameType;
-  gameTypes = GAME_TYPES;
-  typesPlayerHasGamesFor: GameType[];
+  gameTypes: GameType[] = GAME_TYPES;
   gameTypeToGames = new Map<string, Game[]>();
   aggregatedRatings: AggregatedRatings;
 
@@ -35,6 +33,7 @@ export class PlayerDetailsPageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.gameTypes.forEach(x => {this.gameTypeToGames.set(x.toString(), [])});
     this.route.paramMap
       .switchMap((params: ParamMap) => {
         return this.playerService.find(+params.get('id'));
@@ -80,5 +79,9 @@ export class PlayerDetailsPageComponent implements OnInit {
 
   getGamesForType(type: GameType): Game[] {
     return this.gameTypeToGames.get(type.toString());
+  }
+
+  getTypesPlayerHasGamesFor(): GameType[] {
+    return GAME_TYPES.filter(x => this.gameTypeToGames.get(x.toString()).length > 0);
   }
 }

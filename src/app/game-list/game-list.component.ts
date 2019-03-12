@@ -13,7 +13,12 @@ export class GameListComponent {
   @Input() type: GameType;
   @Input() set games(value: Game[]) {
     this._games = value;
-    this.pagedGames = value.slice(0, this.pageSizes[0]);
+
+    if(value !== undefined) {
+      this.pagedGames = value.slice(0, this.pageSizes[0]);
+    } else {
+      this.pagedGames = [];
+    }
   }
 
   @Input() playerId: number;
@@ -22,7 +27,7 @@ export class GameListComponent {
     return this._games;
   }
 
-  pagedGames: Game[];
+  pagedGames: Game[] = [];
   pageSizes = [10, 20, 30];
 
   private _games: Game[] = [];
