@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { Rating } from './models/rating.model';
+import {Game} from './models/game.model';
+import {GAME_TYPES} from './models/game-type.model';
 
 type Moment = moment.Moment;
 
@@ -12,17 +14,23 @@ export class RatingAggregatorService {
 
   aggregate(type: string, ...gameRatingSets: Rating[][]): AggregatedRatings {
     const dates = this.getDistinctDates(gameRatingSets);
+    let gameTypeToGameRatingSets = new Map<string, Rating[]>();
+    GAME_TYPES.forEach(x => {gameTypeToGameRatingSets.set(x.toString(), [])});
 
-    const foosballRatings = gameRatingSets[0];
-    const pingPongRatings = gameRatingSets[1];
+    gameRatingSets.forEach(set => {
+      set.forEach(rating => {
+        gameTypeToGameRatingSets.set(
+          rating.game.toString(),
+          gameTypeToGameRatingSets.get(rating.game.toString()).concat(rating)
+        );
+      })
+    });
 
-    const resultingFoosballRatings = this.fillRatingsForGame(dates, foosballRatings);
-    const resultingPingPongRatings = this.fillRatingsForGame(dates, pingPongRatings);
+    GAME_TYPES.forEach(type => {
+      gameTypeToGameRatingSets.set(type.toString(), this.fillRatingsForGame(dates, gameTypeToGameRatingSets.get(type.toString())))
+    });
 
-    return {
-      foosball: resultingFoosballRatings,
-      pingpong: resultingPingPongRatings
-    };
+    return {gameTypeToRatings: gameTypeToGameRatingSets};
   }
 
   private fillRatingsForGame(dates: Moment[], ratings: Rating[]) {
@@ -84,6 +92,5 @@ export class RatingAggregatorService {
 }
 
 export class AggregatedRatings {
-  foosball: Rating[];
-  pingpong: Rating[];
+  gameTypeToRatings = new Map<string, Rating[]>();
 }

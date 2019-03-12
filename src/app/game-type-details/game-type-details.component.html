@@ -1,0 +1,15 @@
+<div>
+  <h3>{{ gameType | gameType }}</h3>
+  <p><strong>Rating: </strong> {{rating}}</p>
+  <p><strong>Win Ratio: </strong> {{getWinLoss(games)}}</p>
+  <p *ngIf="hasWins">
+    <strong matTooltip="In games against you, this player has lost the most points." matTooltipPosition="right">
+      I {{ '' | mostPointsWonAgainstPipe }}:
+    </strong>
+    <span *ngIf="mostWonAgainst">
+          {{ mostWonAgainst.player.firstName }}
+          {{ mostWonAgainst.player.lastName[0] }}.
+          ({{ mostWonAgainst.stat }} points)
+          </span>
+  </p>
+</div>

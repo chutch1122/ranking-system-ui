@@ -1,20 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, ParamMap} from '@angular/router';
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/observable/zip';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/zip';
-import { Observable } from 'rxjs/Observable';
-import { GameService } from '../game.service';
-import { GAME_TYPES, GameType } from '../models/game-type.model';
-import { Game } from '../models/game.model';
-import { Player } from '../models/player.model';
-import { PlayerService } from '../player.service';
-import { AggregatedRatings, RatingAggregatorService } from '../rating-aggregator.service';
-import { PlayerStat, StatsService } from '../stats.service';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import {Observable} from 'rxjs/Observable';
+import {GameService} from '../game.service';
+import {GAME_TYPES, GameType} from '../models/game-type.model';
+import {Game} from '../models/game.model';
+import {Player} from '../models/player.model';
+import {PlayerService} from '../player.service';
+import {AggregatedRatings, RatingAggregatorService} from '../rating-aggregator.service';
 
 @Component({
   selector: 'app-player-details-page',
@@ -22,25 +20,21 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
   styleUrls: ['./player-details-page.component.scss']
 })
 export class PlayerDetailsPageComponent implements OnInit {
-  gameType = GameType;
-  gameTypes = GAME_TYPES;
+  gameTypes: GameType[] = GAME_TYPES;
+  gameTypeToGames = new Map<string, Game[]>();
+  aggregatedRatings: AggregatedRatings;
 
   player: Player;
-  foosballGames: Game[] = [];
-  pingpongGames: Game[] = [];
-
-  aggregatedRatings: AggregatedRatings;
-  foosballMostPointsWonAgainst: PlayerStat<number>;
-  pingpongMostPointsWonAgainst: PlayerStat<number>;
 
   constructor(private route: ActivatedRoute,
               private playerService: PlayerService,
               private ratingAggregatorService: RatingAggregatorService,
-              private gameService: GameService,
-              private statsService: StatsService) {
+              private gameService: GameService) {
   }
 
+  //TODO: Find a way to generify this zip
   ngOnInit() {
+    this.gameTypes.forEach(x => {this.gameTypeToGames.set(x.toString(), [])});
     this.route.paramMap
       .switchMap((params: ParamMap) => {
         return this.playerService.find(+params.get('id'));
@@ -54,15 +48,13 @@ export class PlayerDetailsPageComponent implements OnInit {
             foosballRatings, pingPongRatings
           })
         ).subscribe(x => {
-          this.aggregatedRatings = this.ratingAggregatorService.aggregate('day', x.foosballRatings, x.pingPongRatings);
+          this.aggregatedRatings = this.ratingAggregatorService.aggregate(
+            'day',
+            x.foosballRatings,
+            x.pingPongRatings
+          );
         });
       })
-      .subscribe();
-
-    this.route.paramMap
-      .switchMap((params: ParamMap) => new BehaviorSubject(+params.get('id')))
-      .do(id => this.statsService.findMostPointsWonAgainst(id, GameType.FOOSBALL).subscribe((x) => this.foosballMostPointsWonAgainst = x))
-      .do(id => this.statsService.findMostPointsWonAgainst(id, GameType.PINGPONG).subscribe((x) => this.pingpongMostPointsWonAgainst = x))
       .subscribe();
 
     this.route.paramMap
@@ -71,22 +63,9 @@ export class PlayerDetailsPageComponent implements OnInit {
       })
       .do(games => games.reverse())
       .do(games => {
-        this.foosballGames = games.filter(game => game.gameType === GameType.FOOSBALL);
-        this.pingpongGames = games.filter(game => game.gameType === GameType.PINGPONG);
+        this.gameTypes.forEach(type => this.gameTypeToGames.set(type.toString(), games.filter(game => game.gameType === type)));
       })
       .subscribe();
-  }
-
-  getWinLoss(games: Game[]) {
-    if (games.length === 0) {
-      return 'N/A';
-    }
-
-    let wins = 0;
-    games.filter(x => x.winningTeam === 'TEAM_A' && x.teamA.map(y => y.id).indexOf(this.player.id) !== -1).forEach(() => wins++);
-
-    const percentile = wins / games.length;
-    return wins + '/' + games.length + ' (' + (percentile * 100).toFixed(2) + '%)';
   }
 
   getRating(gameType: GameType): number {
@@ -104,10 +83,10 @@ export class PlayerDetailsPageComponent implements OnInit {
   }
 
   getGamesForType(type: GameType): Game[] {
-    if (type === GameType.FOOSBALL) {
-      return this.foosballGames;
-    }
+    return this.gameTypeToGames.get(type.toString());
+  }
 
-    return this.pingpongGames;
+  getTypesPlayerHasGamesFor(): GameType[] {
+    return GAME_TYPES.filter(x => this.gameTypeToGames.get(x.toString()).length > 0);
   }
 }
