@@ -32,7 +32,6 @@ export class PlayerDetailsPageComponent implements OnInit {
               private gameService: GameService) {
   }
 
-  //TODO: Find a way to generify this zip
   ngOnInit() {
     this.gameTypes.forEach(x => {this.gameTypeToGames.set(x.toString(), [])});
     this.route.paramMap
@@ -40,21 +39,8 @@ export class PlayerDetailsPageComponent implements OnInit {
         return this.playerService.find(+params.get('id'));
       })
       .do(player => this.player = player)
-      .do(player => {
-        Observable.zip(
-          this.playerService.findRatings(player.id, GameType.FOOSBALL),
-          this.playerService.findRatings(player.id, GameType.PINGPONG),
-          (foosballRatings, pingPongRatings) => ({
-            foosballRatings, pingPongRatings
-          })
-        ).subscribe(x => {
-          this.aggregatedRatings = this.ratingAggregatorService.aggregate(
-            'day',
-            x.foosballRatings,
-            x.pingPongRatings
-          );
-        });
-      })
+      .switchMap(x => this.playerService.findRatingsByPlayer(x.id))
+      .do(ratings => this.aggregatedRatings = this.ratingAggregatorService.aggregate('day', ratings))
       .subscribe();
 
     this.route.paramMap

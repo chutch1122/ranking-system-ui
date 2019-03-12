@@ -30,8 +30,12 @@ describe('RatingAggregatorService', () => {
           {game: GameType.PINGPONG, rating: 1400, delta: -1, createdOn: '2018-04-05T05:00:00'},
         ];
 
-        const result = service.aggregate('day', foosballRatings, pingpongRatings);
+        let map = new Map<string, Rating[]>([
+          ["FOOSBALL", foosballRatings],
+          ["PINGPONG", pingpongRatings],
+        ]);
 
+        const result = service.aggregate('day', map);
 
         const expectedFoosballRatings: Rating[] = [
           {game: GameType.FOOSBALL, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00'},
@@ -41,8 +45,8 @@ describe('RatingAggregatorService', () => {
           {game: GameType.FOOSBALL, rating: 1100, delta: -1, createdOn: '2018-04-05T05:00:00'},
         ];
 
-        expect(result.foosball).toEqual(expectedFoosballRatings);
-        expect(result.pingpong).toEqual(pingpongRatings);
+        expect(result.gameTypeToRatings.get("FOOSBALL")).toEqual(expectedFoosballRatings);
+        expect(result.gameTypeToRatings.get("PINGPONG")).toEqual(pingpongRatings);
       }));
 
       it('should fill in the gaps for a second game', inject([RatingAggregatorService], (service: RatingAggregatorService) => {
@@ -58,7 +62,12 @@ describe('RatingAggregatorService', () => {
           {game: GameType.PINGPONG, rating: 1100, delta: -1, createdOn: '2018-04-05T05:00:00'},
         ];
 
-        const result = service.aggregate('day', foosballRatings, pingpongRatings);
+        let map = new Map<string, Rating[]>([
+          ["FOOSBALL", foosballRatings],
+          ["PINGPONG", pingpongRatings],
+        ]);
+
+        const result = service.aggregate('day', map);
 
         const expectedPingpongRatings: Rating[] = [
           {game: GameType.PINGPONG, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00'},
@@ -68,11 +77,11 @@ describe('RatingAggregatorService', () => {
           {game: GameType.PINGPONG, rating: 1100, delta: -1, createdOn: '2018-04-05T05:00:00'},
         ];
 
-        expect(result.foosball).toEqual(foosballRatings);
-        expect(result.pingpong).toEqual(expectedPingpongRatings);
+        expect(result.gameTypeToRatings.get("FOOSBALL")).toEqual(foosballRatings);
+        expect(result.gameTypeToRatings.get("PINGPONG")).toEqual(expectedPingpongRatings);
       }));
 
-      fit('should fill in the gaps for both games', inject([RatingAggregatorService], (service: RatingAggregatorService) => {
+      it('should fill in the gaps for both games', inject([RatingAggregatorService], (service: RatingAggregatorService) => {
         const foosballRatings: Rating[] = [
           {game: GameType.FOOSBALL, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00'},
           {game: GameType.FOOSBALL, rating: 1100, delta: -1, createdOn: '2018-04-02T05:00:00'},
@@ -83,7 +92,12 @@ describe('RatingAggregatorService', () => {
           {game: GameType.PINGPONG, rating: 1100, delta: -1, createdOn: '2018-04-05T05:00:00'},
         ];
 
-        const result = service.aggregate('day', foosballRatings, pingpongRatings);
+        let map = new Map<string, Rating[]>([
+          ["FOOSBALL", foosballRatings],
+          ["PINGPONG", pingpongRatings],
+        ]);
+
+        const result = service.aggregate('day', map);
 
         const expectedFoosballRatings: Rating[] = [
           {game: GameType.FOOSBALL, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00'},
@@ -99,8 +113,8 @@ describe('RatingAggregatorService', () => {
           {game: GameType.PINGPONG, rating: 1100, delta: -1, createdOn: '2018-04-06T05:00:00'},
         ];
 
-        expect(result.foosball).toEqual(expectedFoosballRatings);
-        expect(result.pingpong).toEqual(expectedPingpongRatings);
+        expect(result.gameTypeToRatings.get("FOOSBALL")).toEqual(expectedFoosballRatings);
+        expect(result.gameTypeToRatings.get("PINGPONG")).toEqual(expectedPingpongRatings);
       }));
 
       it('should extend data points to most recent for both games',
@@ -114,7 +128,12 @@ describe('RatingAggregatorService', () => {
             {game: GameType.PINGPONG, rating: 8888, delta: -1, createdOn: '2018-04-03T05:00:00'},
           ];
 
-          const result = service.aggregate('day', foosballRatings, pingPongRatings);
+          let map = new Map<string, Rating[]>([
+            ["FOOSBALL", foosballRatings],
+            ["PINGPONG", pingPongRatings],
+          ]);
+
+          const result = service.aggregate('day', map);
 
           const expectedFoosballRatings: Rating[] = [
             {game: GameType.FOOSBALL, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00'},
@@ -127,8 +146,8 @@ describe('RatingAggregatorService', () => {
             {game: GameType.PINGPONG, rating: 8888, delta: -1, createdOn: '2018-04-03T05:00:00'},
           ];
 
-          expect(result.foosball).toEqual(expectedFoosballRatings);
-          expect(result.pingpong).toEqual(expectedPingPongRatings);
+          expect(result.gameTypeToRatings.get("FOOSBALL")).toEqual(expectedFoosballRatings);
+          expect(result.gameTypeToRatings.get("PINGPONG")).toEqual(expectedPingPongRatings);
         }));
 
       it('should not extend data points at the start', inject([RatingAggregatorService], (service: RatingAggregatorService) => {
@@ -142,10 +161,15 @@ describe('RatingAggregatorService', () => {
           {game: GameType.PINGPONG, rating: 1100, delta: -1, createdOn: '2018-04-03T05:00:00'},
         ];
 
-        const result = service.aggregate('day', foosballRatings, pingpongRatings);
+        let map = new Map<string, Rating[]>([
+          ["FOOSBALL", foosballRatings],
+          ["PINGPONG", pingpongRatings],
+        ]);
 
-        expect(result.foosball).toEqual(foosballRatings);
-        expect(result.pingpong).toEqual(pingpongRatings);
+        const result = service.aggregate('day', map);
+
+        expect(result.gameTypeToRatings.get("FOOSBALL")).toEqual(foosballRatings);
+        expect(result.gameTypeToRatings.get("PINGPONG")).toEqual(pingpongRatings);
       }));
 
       it('should not add any data points for a game with no games played',
@@ -157,10 +181,15 @@ describe('RatingAggregatorService', () => {
           ];
           const pingpongRatings: Rating[] = [];
 
-          const result = service.aggregate('day', foosballRatings, pingpongRatings);
+          let map = new Map<string, Rating[]>([
+          ["FOOSBALL", foosballRatings],
+          ["PINGPONG", pingpongRatings],
+        ]);
 
-          expect(result.foosball).toEqual(foosballRatings);
-          expect(result.pingpong).toEqual(pingpongRatings);
+        const result = service.aggregate('day', map);
+
+          expect(result.gameTypeToRatings.get("FOOSBALL")).toEqual(foosballRatings);
+          expect(result.gameTypeToRatings.get("PINGPONG")).toEqual(pingpongRatings);
         }));
 
       it('should take most recent score of day', inject([RatingAggregatorService], (service: RatingAggregatorService) => {
@@ -177,10 +206,15 @@ describe('RatingAggregatorService', () => {
 
         const pingpongRatings: Rating[] = [];
 
-        const result = service.aggregate('day', foosballRatings, pingpongRatings);
+        let map = new Map<string, Rating[]>([
+          ["FOOSBALL", foosballRatings],
+          ["PINGPONG", pingpongRatings],
+        ]);
 
-        expect(result.foosball).toEqual(expectedFoosballRatings);
-        expect(result.pingpong).toEqual(pingpongRatings);
+        const result = service.aggregate('day', map);
+
+        expect(result.gameTypeToRatings.get("FOOSBALL")).toEqual(expectedFoosballRatings);
+        expect(result.gameTypeToRatings.get("PINGPONG")).toEqual(pingpongRatings);
       }));
 
     });

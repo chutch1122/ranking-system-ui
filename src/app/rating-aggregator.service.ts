@@ -8,29 +8,21 @@ type Moment = moment.Moment;
 
 @Injectable()
 export class RatingAggregatorService {
+  gameTypes = GAME_TYPES;
 
   constructor() {
   }
 
-  aggregate(type: string, ...gameRatingSets: Rating[][]): AggregatedRatings {
-    const dates = this.getDistinctDates(gameRatingSets);
-    let gameTypeToGameRatingSets = new Map<string, Rating[]>();
-    GAME_TYPES.forEach(x => {gameTypeToGameRatingSets.set(x.toString(), [])});
+  aggregate(type: string, ratingsByGameType: Map<string, Rating[]>): AggregatedRatings {
+    const dates = this.getDistinctDates(ratingsByGameType);
+    let result = new Map<string, Rating[]>();
+    this.gameTypes.forEach(x => {result.set(x.toString(), [])});
 
-    gameRatingSets.forEach(set => {
-      set.forEach(rating => {
-        gameTypeToGameRatingSets.set(
-          rating.game.toString(),
-          gameTypeToGameRatingSets.get(rating.game.toString()).concat(rating)
-        );
-      })
+    this.gameTypes.forEach(type => {
+      result.set(type.toString(), this.fillRatingsForGame(dates, ratingsByGameType.get(type.toString())))
     });
 
-    GAME_TYPES.forEach(type => {
-      gameTypeToGameRatingSets.set(type.toString(), this.fillRatingsForGame(dates, gameTypeToGameRatingSets.get(type.toString())))
-    });
-
-    return {gameTypeToRatings: gameTypeToGameRatingSets};
+    return {gameTypeToRatings: result};
   }
 
   private fillRatingsForGame(dates: Moment[], ratings: Rating[]) {
@@ -80,11 +72,11 @@ export class RatingAggregatorService {
     return result;
   }
 
-  private getDistinctDates(gameRatingSets: Rating[][]) {
+  private getDistinctDates(gameRatingSets: Map<string, Rating[]>) {
     const datesSet: Set<string> = new Set<string>();
 
-    for (const ratingSet of gameRatingSets) {
-      ratingSet.forEach(x => datesSet.add(x.createdOn));
+    for (const ratings of Array.from(gameRatingSets.values())) {
+      ratings.forEach(x => datesSet.add(x.createdOn));
     }
 
     return Array.from(datesSet).map(x => moment.utc(x)).sort((a, b) => a.isBefore(b) ? -1 : 1);
