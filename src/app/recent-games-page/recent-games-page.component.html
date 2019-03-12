@@ -1,22 +1,11 @@
 <div class="game-lists">
-  <div class="game-list">
+  <div class="game-list" *ngFor="let type of gameTypes">
     <mat-card>
       <mat-card-content>
-        <h1>{{ gameTypes[0] | gameType }}</h1>
+        <h1>{{ type | gameType }}</h1>
         <app-game-list
-          [type]="gameTypes[0]"
-          [games]="foosballGames"
-        ></app-game-list>
-      </mat-card-content>
-    </mat-card>
-  </div>
-  <div class="game-list">
-    <mat-card>
-      <mat-card-content>
-        <h1>{{ gameTypes[1] | gameType }}</h1>
-        <app-game-list
-          [type]="gameTypes[1]"
-          [games]="pingpongGames"
+          [type]="type"
+          [games]="gameTypeToGames.get(type)"
         ></app-game-list>
       </mat-card-content>
     </mat-card>

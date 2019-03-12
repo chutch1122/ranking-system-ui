@@ -1,10 +1,9 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { environment } from '../environments/environment';
-import { GameType } from './models/game-type.model';
-import { Game } from './models/game.model';
-import { SubmitGameRequest } from './requests/submit-game.request';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import {environment} from '../environments/environment';
+import {Game} from './models/game.model';
+import {SubmitGameRequest} from './requests/submit-game.request';
 
 @Injectable()
 export class GameService {
@@ -15,7 +14,7 @@ export class GameService {
     return this.http.post(environment.apiUrl + '/games', request);
   }
 
-  recent(gameType: GameType): Observable<Game[]> {
+  recent(gameType: string): Observable<Game[]> {
     return this.http.get<Game[]>(environment.apiUrl + `/games/recent/${gameType}`);
   }
 
