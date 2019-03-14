@@ -10,7 +10,7 @@
       <!-- Position Column -->
       <ng-container matColumnDef="rank">
         <mat-header-cell *matHeaderCellDef> Rank</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.rank}} </mat-cell>
+        <mat-cell *matCellDef="let element"> {{element.rank}}</mat-cell>
       </ng-container>
 
       <!-- Name Column -->
@@ -18,12 +18,12 @@
         <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
         <mat-cell *matCellDef="let element">
           <div class="subflex">
-          <span>
-            <a href="/players/{{element.playerId}}">{{element.name}}</a>
-          </span>
-          <span class="spanny-boi">
-            <app-streak [value]="element.streak" class="streak-marker"></app-streak>
-          </span>
+            <span>
+              <a href="/players/{{element.playerId}}">{{element.name}}</a>
+            </span>
+            <span class="spanny-boi">
+              <app-streak [value]="element.streak" class="streak-marker"></app-streak>
+            </span>
           </div>
         </mat-cell>
       </ng-container>

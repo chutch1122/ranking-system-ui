@@ -22,5 +22,4 @@ export class LeaderboardPageComponent implements OnInit {
       .do(x => this.players = x)
       .subscribe();
   }
-
 }

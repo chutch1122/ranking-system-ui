@@ -1,18 +1,17 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, ParamMap} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/observable/zip';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/zip';
-import {Observable} from 'rxjs/Observable';
-import {GameService} from '../game.service';
-import {GAME_TYPES, GameType} from '../models/game-type.model';
-import {Game} from '../models/game.model';
-import {Player} from '../models/player.model';
-import {PlayerService} from '../player.service';
-import {AggregatedRatings, RatingAggregatorService} from '../rating-aggregator.service';
+import { GameService } from '../game.service';
+import { GAME_TYPES, GameType } from '../models/game-type.model';
+import { Game } from '../models/game.model';
+import { Player } from '../models/player.model';
+import { PlayerService } from '../player.service';
+import { AggregatedRatings, RatingAggregatorService } from '../rating-aggregator.service';
 
 @Component({
   selector: 'app-player-details-page',
@@ -33,7 +32,9 @@ export class PlayerDetailsPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.gameTypes.forEach(x => {this.gameTypeToGames.set(x.toString(), [])});
+    this.gameTypes.forEach(x => {
+      this.gameTypeToGames.set(x.toString(), []);
+    });
     this.route.paramMap
       .switchMap((params: ParamMap) => {
         return this.playerService.find(+params.get('id'));

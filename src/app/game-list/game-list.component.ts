@@ -11,26 +11,25 @@ import { PageEvent } from '@angular/material';
 })
 export class GameListComponent {
   @Input() type: GameType;
-  @Input() set games(value: Game[]) {
-    this._games = value;
-
-    if(value !== undefined) {
-      this.pagedGames = value.slice(0, this.pageSizes[0]);
-    } else {
-      this.pagedGames = [];
-    }
-  }
-
   @Input() playerId: number;
+  pagedGames: Game[] = [];
+  pageSizes = [10, 20, 30];
+
+  private _games: Game[] = [];
 
   get games() {
     return this._games;
   }
 
-  pagedGames: Game[] = [];
-  pageSizes = [10, 20, 30];
+  @Input() set games(value: Game[]) {
+    this._games = value;
 
-  private _games: Game[] = [];
+    if (value !== undefined) {
+      this.pagedGames = value.slice(0, this.pageSizes[0]);
+    } else {
+      this.pagedGames = [];
+    }
+  }
 
   getFullName(player: Player): string {
     return player.firstName + ' ' + player.lastName[0] + '.';

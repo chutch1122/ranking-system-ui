@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { Rating } from './models/rating.model';
-import {Game} from './models/game.model';
-import {GAME_TYPES} from './models/game-type.model';
+import { GAME_TYPES } from './models/game-type.model';
 
 type Moment = moment.Moment;
 
@@ -16,10 +15,12 @@ export class RatingAggregatorService {
   aggregate(type: string, ratingsByGameType: Map<string, Rating[]>): AggregatedRatings {
     const dates = this.getDistinctDates(ratingsByGameType);
     let result = new Map<string, Rating[]>();
-    this.gameTypes.forEach(x => {result.set(x.toString(), [])});
+    this.gameTypes.forEach(x => {
+      result.set(x.toString(), []);
+    });
 
     this.gameTypes.forEach(type => {
-      result.set(type.toString(), this.fillRatingsForGame(dates, ratingsByGameType.get(type.toString())))
+      result.set(type.toString(), this.fillRatingsForGame(dates, ratingsByGameType.get(type.toString())));
     });
 
     return {gameTypeToRatings: result};

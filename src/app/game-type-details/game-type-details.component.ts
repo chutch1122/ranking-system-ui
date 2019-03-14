@@ -1,9 +1,9 @@
-import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
-import {GameType} from '../models/game-type.model';
-import {Game} from '../models/game.model';
-import {PlayerStat, StatsService} from '../stats.service';
-import {ActivatedRoute, ParamMap} from '@angular/router';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { GameType } from '../models/game-type.model';
+import { Game } from '../models/game.model';
+import { PlayerStat, StatsService } from '../stats.service';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Component({
   selector: 'app-game-type-details',

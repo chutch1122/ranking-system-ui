@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import 'rxjs/add/operator/do';
-import {GameService} from '../game.service';
-import {GAME_TYPES} from '../models/game-type.model';
-import {Game} from '../models/game.model';
+import { GameService } from '../game.service';
+import { GAME_TYPES } from '../models/game-type.model';
+import { Game } from '../models/game.model';
 
 @Component({
   selector: 'app-recent-games-page',
@@ -17,7 +17,9 @@ export class RecentGamesPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.gameTypes.forEach(x => {this.gameTypeToGames.set(x.toString(), [])});
+    this.gameTypes.forEach(x => {
+      this.gameTypeToGames.set(x.toString(), []);
+    });
 
     this.gameTypes.forEach(type => {
       this.gameService.recent(type.toString())
@@ -27,10 +29,10 @@ export class RecentGamesPageComponent implements OnInit {
   }
 
   setGamesList(type: string, games: Game[]) {
-    if(games === undefined){
+    if (games === undefined) {
       games = [];
     }
 
-    this.gameTypeToGames.set(type, games)
+    this.gameTypeToGames.set(type, games);
   }
 }

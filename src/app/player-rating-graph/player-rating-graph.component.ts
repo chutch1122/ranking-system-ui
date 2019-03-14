@@ -1,11 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import * as moment from 'moment';
-import {GameTypePipe} from '../game-type.pipe';
-import {Optional} from '../helpers';
-import {GAME_TYPES, GameType} from '../models/game-type.model';
-import {Rating} from '../models/rating.model';
-import {SeriesEntry} from '../models/series-entry.model';
-import {AggregatedRatings} from '../rating-aggregator.service';
+import { GameTypePipe } from '../game-type.pipe';
+import { Optional } from '../helpers';
+import { GAME_TYPES, GameType } from '../models/game-type.model';
+import { Rating } from '../models/rating.model';
+import { SeriesEntry } from '../models/series-entry.model';
+import { AggregatedRatings } from '../rating-aggregator.service';
 
 @Component({
   selector: 'app-player-rating-graph',
@@ -37,7 +37,7 @@ export class PlayerRatingGraphComponent implements OnInit {
 
     GAME_TYPES.forEach(type => {
       this.buildSeriesIfPresent(aggregatedRatings.gameTypeToRatings.get(type.toString()), type)
-        .ifPresent(x => result.push(x))
+        .ifPresent(x => result.push(x));
     });
 
     return result;
