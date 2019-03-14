@@ -19,18 +19,18 @@ describe('RatingAggregatorService', () => {
     describe('by day', () => {
       it('should fill in the gaps for a first game', inject([RatingAggregatorService], (service: RatingAggregatorService) => {
         const foosballRatings: Rating[] = [
-          {game: GameType.FOOSBALL, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00'},
-          {game: GameType.FOOSBALL, rating: 1100, delta: -1, createdOn: '2018-04-05T05:00:00'},
+          {game: GameType.FOOSBALL, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00', streak: 0},
+          {game: GameType.FOOSBALL, rating: 1100, delta: -1, createdOn: '2018-04-05T05:00:00', streak: 0},
         ];
         const pingpongRatings: Rating[] = [
-          {game: GameType.PINGPONG, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00'},
-          {game: GameType.PINGPONG, rating: 1100, delta: -1, createdOn: '2018-04-02T05:00:00'},
-          {game: GameType.PINGPONG, rating: 1200, delta: -1, createdOn: '2018-04-03T05:00:00'},
-          {game: GameType.PINGPONG, rating: 1300, delta: -1, createdOn: '2018-04-04T05:00:00'},
-          {game: GameType.PINGPONG, rating: 1400, delta: -1, createdOn: '2018-04-05T05:00:00'},
+          {game: GameType.PINGPONG, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00', streak: 0},
+          {game: GameType.PINGPONG, rating: 1100, delta: -1, createdOn: '2018-04-02T05:00:00', streak: 0},
+          {game: GameType.PINGPONG, rating: 1200, delta: -1, createdOn: '2018-04-03T05:00:00', streak: 0},
+          {game: GameType.PINGPONG, rating: 1300, delta: -1, createdOn: '2018-04-04T05:00:00', streak: 0},
+          {game: GameType.PINGPONG, rating: 1400, delta: -1, createdOn: '2018-04-05T05:00:00', streak: 0},
         ];
 
-        let map = new Map<string, Rating[]>([
+        const map = new Map<string, Rating[]>([
           ['FOOSBALL', foosballRatings],
           ['PINGPONG', pingpongRatings],
         ]);
@@ -38,11 +38,11 @@ describe('RatingAggregatorService', () => {
         const result = service.aggregate('day', map);
 
         const expectedFoosballRatings: Rating[] = [
-          {game: GameType.FOOSBALL, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00'},
-          {game: GameType.FOOSBALL, rating: 1000, delta: -1, createdOn: '2018-04-02T05:00:00'},
-          {game: GameType.FOOSBALL, rating: 1000, delta: -1, createdOn: '2018-04-03T05:00:00'},
-          {game: GameType.FOOSBALL, rating: 1000, delta: -1, createdOn: '2018-04-04T05:00:00'},
-          {game: GameType.FOOSBALL, rating: 1100, delta: -1, createdOn: '2018-04-05T05:00:00'},
+          {game: GameType.FOOSBALL, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00', streak: 0},
+          {game: GameType.FOOSBALL, rating: 1000, delta: -1, createdOn: '2018-04-02T05:00:00', streak: 0},
+          {game: GameType.FOOSBALL, rating: 1000, delta: -1, createdOn: '2018-04-03T05:00:00', streak: 0},
+          {game: GameType.FOOSBALL, rating: 1000, delta: -1, createdOn: '2018-04-04T05:00:00', streak: 0},
+          {game: GameType.FOOSBALL, rating: 1100, delta: -1, createdOn: '2018-04-05T05:00:00', streak: 0},
         ];
 
         expect(result.gameTypeToRatings.get('FOOSBALL')).toEqual(expectedFoosballRatings);
@@ -51,18 +51,18 @@ describe('RatingAggregatorService', () => {
 
       it('should fill in the gaps for a second game', inject([RatingAggregatorService], (service: RatingAggregatorService) => {
         const foosballRatings: Rating[] = [
-          {game: GameType.FOOSBALL, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00'},
-          {game: GameType.FOOSBALL, rating: 1100, delta: -1, createdOn: '2018-04-02T05:00:00'},
-          {game: GameType.FOOSBALL, rating: 1200, delta: -1, createdOn: '2018-04-03T05:00:00'},
-          {game: GameType.FOOSBALL, rating: 1300, delta: -1, createdOn: '2018-04-04T05:00:00'},
-          {game: GameType.FOOSBALL, rating: 1400, delta: -1, createdOn: '2018-04-05T05:00:00'},
+          {game: GameType.FOOSBALL, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00', streak: 0},
+          {game: GameType.FOOSBALL, rating: 1100, delta: -1, createdOn: '2018-04-02T05:00:00', streak: 0},
+          {game: GameType.FOOSBALL, rating: 1200, delta: -1, createdOn: '2018-04-03T05:00:00', streak: 0},
+          {game: GameType.FOOSBALL, rating: 1300, delta: -1, createdOn: '2018-04-04T05:00:00', streak: 0},
+          {game: GameType.FOOSBALL, rating: 1400, delta: -1, createdOn: '2018-04-05T05:00:00', streak: 0},
         ];
         const pingpongRatings: Rating[] = [
-          {game: GameType.PINGPONG, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00'},
-          {game: GameType.PINGPONG, rating: 1100, delta: -1, createdOn: '2018-04-05T05:00:00'},
+          {game: GameType.PINGPONG, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00', streak: 0},
+          {game: GameType.PINGPONG, rating: 1100, delta: -1, createdOn: '2018-04-05T05:00:00', streak: 0},
         ];
 
-        let map = new Map<string, Rating[]>([
+        const map = new Map<string, Rating[]>([
           ['FOOSBALL', foosballRatings],
           ['PINGPONG', pingpongRatings],
         ]);
@@ -70,11 +70,11 @@ describe('RatingAggregatorService', () => {
         const result = service.aggregate('day', map);
 
         const expectedPingpongRatings: Rating[] = [
-          {game: GameType.PINGPONG, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00'},
-          {game: GameType.PINGPONG, rating: 1000, delta: -1, createdOn: '2018-04-02T05:00:00'},
-          {game: GameType.PINGPONG, rating: 1000, delta: -1, createdOn: '2018-04-03T05:00:00'},
-          {game: GameType.PINGPONG, rating: 1000, delta: -1, createdOn: '2018-04-04T05:00:00'},
-          {game: GameType.PINGPONG, rating: 1100, delta: -1, createdOn: '2018-04-05T05:00:00'},
+          {game: GameType.PINGPONG, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00', streak: 0},
+          {game: GameType.PINGPONG, rating: 1000, delta: -1, createdOn: '2018-04-02T05:00:00', streak: 0},
+          {game: GameType.PINGPONG, rating: 1000, delta: -1, createdOn: '2018-04-03T05:00:00', streak: 0},
+          {game: GameType.PINGPONG, rating: 1000, delta: -1, createdOn: '2018-04-04T05:00:00', streak: 0},
+          {game: GameType.PINGPONG, rating: 1100, delta: -1, createdOn: '2018-04-05T05:00:00', streak: 0},
         ];
 
         expect(result.gameTypeToRatings.get('FOOSBALL')).toEqual(foosballRatings);
@@ -83,16 +83,16 @@ describe('RatingAggregatorService', () => {
 
       it('should fill in the gaps for both games', inject([RatingAggregatorService], (service: RatingAggregatorService) => {
         const foosballRatings: Rating[] = [
-          {game: GameType.FOOSBALL, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00'},
-          {game: GameType.FOOSBALL, rating: 1100, delta: -1, createdOn: '2018-04-02T05:00:00'},
-          {game: GameType.FOOSBALL, rating: 1400, delta: -1, createdOn: '2018-04-06T05:00:00'},
+          {game: GameType.FOOSBALL, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00', streak: 0},
+          {game: GameType.FOOSBALL, rating: 1100, delta: -1, createdOn: '2018-04-02T05:00:00', streak: 0},
+          {game: GameType.FOOSBALL, rating: 1400, delta: -1, createdOn: '2018-04-06T05:00:00', streak: 0},
         ];
         const pingpongRatings: Rating[] = [
-          {game: GameType.PINGPONG, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00'},
-          {game: GameType.PINGPONG, rating: 1100, delta: -1, createdOn: '2018-04-05T05:00:00'},
+          {game: GameType.PINGPONG, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00', streak: 0},
+          {game: GameType.PINGPONG, rating: 1100, delta: -1, createdOn: '2018-04-05T05:00:00', streak: 0},
         ];
 
-        let map = new Map<string, Rating[]>([
+        const map = new Map<string, Rating[]>([
           ['FOOSBALL', foosballRatings],
           ['PINGPONG', pingpongRatings],
         ]);
@@ -100,17 +100,17 @@ describe('RatingAggregatorService', () => {
         const result = service.aggregate('day', map);
 
         const expectedFoosballRatings: Rating[] = [
-          {game: GameType.FOOSBALL, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00'},
-          {game: GameType.FOOSBALL, rating: 1100, delta: -1, createdOn: '2018-04-02T05:00:00'},
-          {game: GameType.FOOSBALL, rating: 1100, delta: -1, createdOn: '2018-04-05T05:00:00'},
-          {game: GameType.FOOSBALL, rating: 1400, delta: -1, createdOn: '2018-04-06T05:00:00'},
+          {game: GameType.FOOSBALL, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00', streak: 0},
+          {game: GameType.FOOSBALL, rating: 1100, delta: -1, createdOn: '2018-04-02T05:00:00', streak: 0},
+          {game: GameType.FOOSBALL, rating: 1100, delta: -1, createdOn: '2018-04-05T05:00:00', streak: 0},
+          {game: GameType.FOOSBALL, rating: 1400, delta: -1, createdOn: '2018-04-06T05:00:00', streak: 0},
         ];
 
         const expectedPingpongRatings: Rating[] = [
-          {game: GameType.PINGPONG, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00'},
-          {game: GameType.PINGPONG, rating: 1000, delta: -1, createdOn: '2018-04-02T05:00:00'},
-          {game: GameType.PINGPONG, rating: 1100, delta: -1, createdOn: '2018-04-05T05:00:00'},
-          {game: GameType.PINGPONG, rating: 1100, delta: -1, createdOn: '2018-04-06T05:00:00'},
+          {game: GameType.PINGPONG, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00', streak: 0},
+          {game: GameType.PINGPONG, rating: 1000, delta: -1, createdOn: '2018-04-02T05:00:00', streak: 0},
+          {game: GameType.PINGPONG, rating: 1100, delta: -1, createdOn: '2018-04-05T05:00:00', streak: 0},
+          {game: GameType.PINGPONG, rating: 1100, delta: -1, createdOn: '2018-04-06T05:00:00', streak: 0},
         ];
 
         expect(result.gameTypeToRatings.get('FOOSBALL')).toEqual(expectedFoosballRatings);
@@ -120,15 +120,15 @@ describe('RatingAggregatorService', () => {
       it('should extend data points to most recent for both games',
         inject([RatingAggregatorService], (service: RatingAggregatorService) => {
           const foosballRatings: Rating[] = [
-            {game: GameType.FOOSBALL, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00'},
-            {game: GameType.FOOSBALL, rating: 9999, delta: -1, createdOn: '2018-04-02T05:00:00'},
+            {game: GameType.FOOSBALL, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00', streak: 0},
+            {game: GameType.FOOSBALL, rating: 9999, delta: -1, createdOn: '2018-04-02T05:00:00', streak: 0},
           ];
           const pingPongRatings: Rating[] = [
-            {game: GameType.PINGPONG, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00'},
-            {game: GameType.PINGPONG, rating: 8888, delta: -1, createdOn: '2018-04-03T05:00:00'},
+            {game: GameType.PINGPONG, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00', streak: 0},
+            {game: GameType.PINGPONG, rating: 8888, delta: -1, createdOn: '2018-04-03T05:00:00', streak: 0},
           ];
 
-          let map = new Map<string, Rating[]>([
+          const map = new Map<string, Rating[]>([
             ['FOOSBALL', foosballRatings],
             ['PINGPONG', pingPongRatings],
           ]);
@@ -136,14 +136,14 @@ describe('RatingAggregatorService', () => {
           const result = service.aggregate('day', map);
 
           const expectedFoosballRatings: Rating[] = [
-            {game: GameType.FOOSBALL, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00'},
-            {game: GameType.FOOSBALL, rating: 9999, delta: -1, createdOn: '2018-04-02T05:00:00'},
-            {game: GameType.FOOSBALL, rating: 9999, delta: -1, createdOn: '2018-04-03T05:00:00'},
+            {game: GameType.FOOSBALL, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00', streak: 0},
+            {game: GameType.FOOSBALL, rating: 9999, delta: -1, createdOn: '2018-04-02T05:00:00', streak: 0},
+            {game: GameType.FOOSBALL, rating: 9999, delta: -1, createdOn: '2018-04-03T05:00:00', streak: 0},
           ];
           const expectedPingPongRatings: Rating[] = [
-            {game: GameType.PINGPONG, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00'},
-            {game: GameType.PINGPONG, rating: 1000, delta: -1, createdOn: '2018-04-02T05:00:00'},
-            {game: GameType.PINGPONG, rating: 8888, delta: -1, createdOn: '2018-04-03T05:00:00'},
+            {game: GameType.PINGPONG, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00', streak: 0},
+            {game: GameType.PINGPONG, rating: 1000, delta: -1, createdOn: '2018-04-02T05:00:00', streak: 0},
+            {game: GameType.PINGPONG, rating: 8888, delta: -1, createdOn: '2018-04-03T05:00:00', streak: 0},
           ];
 
           expect(result.gameTypeToRatings.get('FOOSBALL')).toEqual(expectedFoosballRatings);
@@ -152,16 +152,16 @@ describe('RatingAggregatorService', () => {
 
       it('should not extend data points at the start', inject([RatingAggregatorService], (service: RatingAggregatorService) => {
         const foosballRatings: Rating[] = [
-          {game: GameType.FOOSBALL, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00'},
-          {game: GameType.FOOSBALL, rating: 1200, delta: -1, createdOn: '2018-04-02T05:00:00'},
-          {game: GameType.FOOSBALL, rating: 1300, delta: -1, createdOn: '2018-04-03T05:00:00'},
+          {game: GameType.FOOSBALL, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00', streak: 0},
+          {game: GameType.FOOSBALL, rating: 1200, delta: -1, createdOn: '2018-04-02T05:00:00', streak: 0},
+          {game: GameType.FOOSBALL, rating: 1300, delta: -1, createdOn: '2018-04-03T05:00:00', streak: 0},
         ];
         const pingpongRatings: Rating[] = [
-          {game: GameType.PINGPONG, rating: 1000, delta: -1, createdOn: '2018-04-02T05:00:00'},
-          {game: GameType.PINGPONG, rating: 1100, delta: -1, createdOn: '2018-04-03T05:00:00'},
+          {game: GameType.PINGPONG, rating: 1000, delta: -1, createdOn: '2018-04-02T05:00:00', streak: 0},
+          {game: GameType.PINGPONG, rating: 1100, delta: -1, createdOn: '2018-04-03T05:00:00', streak: 0},
         ];
 
-        let map = new Map<string, Rating[]>([
+        const map = new Map<string, Rating[]>([
           ['FOOSBALL', foosballRatings],
           ['PINGPONG', pingpongRatings],
         ]);
@@ -175,13 +175,13 @@ describe('RatingAggregatorService', () => {
       it('should not add any data points for a game with no games played',
         inject([RatingAggregatorService], (service: RatingAggregatorService) => {
           const foosballRatings: Rating[] = [
-            {game: GameType.FOOSBALL, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00'},
-            {game: GameType.FOOSBALL, rating: 1200, delta: -1, createdOn: '2018-04-02T05:00:00'},
-            {game: GameType.FOOSBALL, rating: 1300, delta: -1, createdOn: '2018-04-03T05:00:00'},
+            {game: GameType.FOOSBALL, rating: 1000, delta: -1, createdOn: '2018-04-01T05:00:00', streak: 0},
+            {game: GameType.FOOSBALL, rating: 1200, delta: -1, createdOn: '2018-04-02T05:00:00', streak: 0},
+            {game: GameType.FOOSBALL, rating: 1300, delta: -1, createdOn: '2018-04-03T05:00:00', streak: 0},
           ];
           const pingpongRatings: Rating[] = [];
 
-          let map = new Map<string, Rating[]>([
+          const map = new Map<string, Rating[]>([
             ['FOOSBALL', foosballRatings],
             ['PINGPONG', pingpongRatings],
           ]);
@@ -194,19 +194,19 @@ describe('RatingAggregatorService', () => {
 
       it('should take most recent score of day', inject([RatingAggregatorService], (service: RatingAggregatorService) => {
         const foosballRatings: Rating[] = [
-          {game: GameType.FOOSBALL, rating: 1000, delta: -1, createdOn: '2018-04-02T05:00:00'},
-          {game: GameType.FOOSBALL, rating: 1200, delta: -1, createdOn: '2018-04-02T05:00:00'},
-          {game: GameType.FOOSBALL, rating: 1300, delta: -1, createdOn: '2018-04-03T05:00:00'},
+          {game: GameType.FOOSBALL, rating: 1000, delta: -1, createdOn: '2018-04-02T05:00:00', streak: 0},
+          {game: GameType.FOOSBALL, rating: 1200, delta: -1, createdOn: '2018-04-02T05:00:00', streak: 0},
+          {game: GameType.FOOSBALL, rating: 1300, delta: -1, createdOn: '2018-04-03T05:00:00', streak: 0},
         ];
 
         const expectedFoosballRatings: Rating[] = [
-          {game: GameType.FOOSBALL, rating: 1200, delta: -1, createdOn: '2018-04-02T05:00:00'},
-          {game: GameType.FOOSBALL, rating: 1300, delta: -1, createdOn: '2018-04-03T05:00:00'},
+          {game: GameType.FOOSBALL, rating: 1200, delta: -1, createdOn: '2018-04-02T05:00:00', streak: 0},
+          {game: GameType.FOOSBALL, rating: 1300, delta: -1, createdOn: '2018-04-03T05:00:00', streak: 0},
         ];
 
         const pingpongRatings: Rating[] = [];
 
-        let map = new Map<string, Rating[]>([
+        const map = new Map<string, Rating[]>([
           ['FOOSBALL', foosballRatings],
           ['PINGPONG', pingpongRatings],
         ]);
