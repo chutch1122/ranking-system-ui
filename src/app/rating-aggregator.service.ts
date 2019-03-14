@@ -14,13 +14,13 @@ export class RatingAggregatorService {
 
   aggregate(type: string, ratingsByGameType: Map<string, Rating[]>): AggregatedRatings {
     const dates = this.getDistinctDates(ratingsByGameType);
-    let result = new Map<string, Rating[]>();
+    const result = new Map<string, Rating[]>();
     this.gameTypes.forEach(x => {
       result.set(x.toString(), []);
     });
 
-    this.gameTypes.forEach(type => {
-      result.set(type.toString(), this.fillRatingsForGame(dates, ratingsByGameType.get(type.toString())));
+    this.gameTypes.filter(x => ratingsByGameType.has(x)).forEach(gameType => {
+      result.set(gameType, this.fillRatingsForGame(dates, ratingsByGameType.get(gameType)));
     });
 
     return {gameTypeToRatings: result};
