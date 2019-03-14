@@ -9,28 +9,38 @@
 
       <!-- Position Column -->
       <ng-container matColumnDef="rank">
-        <mat-header-cell *matHeaderCellDef> Rank </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> Rank</mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.rank}} </mat-cell>
       </ng-container>
 
       <!-- Name Column -->
       <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-        <mat-cell *matCellDef="let element"><a href="/players/{{element.playerId}}">{{element.name}}</a></mat-cell>
+        <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <div class="subflex">
+          <span>
+            <a href="/players/{{element.playerId}}">{{element.name}}</a>
+          </span>
+          <span class="spanny-boi">
+            <app-streak [value]="element.streak" class="streak-marker"></app-streak>
+          </span>
+          </div>
+        </mat-cell>
       </ng-container>
 
       <!-- Weight Column -->
       <ng-container matColumnDef="rating">
-        <mat-header-cell *matHeaderCellDef> Rating </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.rating}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef> Rating</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.rating}}</mat-cell>
       </ng-container>
 
       <!-- Delta Column -->
       <ng-container matColumnDef="delta">
-        <mat-header-cell *matHeaderCellDef> Delta </mat-header-cell>
-        <mat-cell *matCellDef="let element"> <app-numeric-stoplight [value]="element.delta"></app-numeric-stoplight> </mat-cell>
+        <mat-header-cell *matHeaderCellDef> Delta</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <app-numeric-stoplight [value]="element.delta"></app-numeric-stoplight>
+        </mat-cell>
       </ng-container>
-
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

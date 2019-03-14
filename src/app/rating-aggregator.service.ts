@@ -42,7 +42,8 @@ export class RatingAggregatorService {
           game: lastRating.game,
           rating: lastRating.rating,
           delta: lastRating.delta,
-          createdOn: newDateString.substr(0, newDateString.indexOf('.'))
+          createdOn: newDateString.substr(0, newDateString.indexOf('.')),
+          streak: lastRating.streak
         };
 
         result.push(lastRating);
@@ -58,7 +59,8 @@ export class RatingAggregatorService {
             game: lastRating.game,
             rating: lastRating.rating,
             delta: lastRating.delta,
-            createdOn: newDateString.substr(0, newDateString.indexOf('.'))
+            createdOn: newDateString.substr(0, newDateString.indexOf('.')),
+            streak: lastRating.streak
           };
           result.push(lastRating);
         }
