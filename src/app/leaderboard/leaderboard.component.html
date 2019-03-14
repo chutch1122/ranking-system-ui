@@ -17,14 +17,15 @@
       <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <div class="subflex">
-            <span>
-              <a href="/players/{{element.playerId}}">{{element.name}}</a>
-            </span>
-            <span class="spanny-boi">
-              <app-streak [value]="element.streak" class="streak-marker"></app-streak>
-            </span>
-          </div>
+          <a href="/players/{{element.playerId}}">{{element.name}}</a>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Streak Column -->
+      <ng-container matColumnDef="streak">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <app-streak [value]="element.streak"></app-streak>
         </mat-cell>
       </ng-container>
 

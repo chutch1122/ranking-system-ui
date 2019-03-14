@@ -12,6 +12,10 @@ import * as moment from 'moment';
 export class LeaderboardComponent implements OnInit {
   @Input() game: GameType;
 
+  displayedColumns = ['rank', 'streak', 'name', 'rating', 'delta'];
+
+  data: LeaderboardRow[];
+
   @Input() set players(data: Player[]) {
     const filtered = data
       .filter(x => {
@@ -47,7 +51,7 @@ export class LeaderboardComponent implements OnInit {
       const ratingIndex = player.ratings.map(x => x.game).indexOf(this.game);
       const rating = player.ratings[ratingIndex].rating;
       const delta = player.ratings[ratingIndex].delta;
-      const streak = this.parseHtmlCodeForStreak(player.ratings[ratingIndex].streak);
+      const streak = player.ratings[ratingIndex].streak;
 
       this.data.push({
         rank: i + 1,
@@ -60,25 +64,6 @@ export class LeaderboardComponent implements OnInit {
     }
 
   }
-
-  parseHtmlCodeForStreak(streak: number): string {
-
-    switch (true) {
-      case streak > 4:
-        return '💥';
-      case streak > 2:
-        return '🔥';
-      case streak < -4:
-        return '☃';
-      case streak < 2:
-        return '❄';
-      default:
-        return '';
-    }
-  }
-
-  data: LeaderboardRow[];
-  displayedColumns = ['rank', 'name', 'rating', 'delta'];
 
   constructor() {
   }
@@ -93,5 +78,5 @@ export class LeaderboardRow {
   name: string;
   rating: number;
   delta: number;
-  streak: string;
+  streak: number;
 }

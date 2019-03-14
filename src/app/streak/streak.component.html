@@ -1,28 +1,28 @@
 <span *ngIf="isVeryHot"
       class="x-large"
-      matTooltip="You are blowing up! (5+ wins)"
+      matTooltip="On fire! (5+ wins)"
       matTooltipPosition="right">
-  {{value}}
+  {{value | streak}}
 </span>
 <span *ngIf="isHot"
       class="x-large adjustPadding"
-      matTooltip="You are heating up! (3+ wins)"
+      matTooltip="Heating up! (3+ wins)"
       matTooltipPosition="right">
-  {{value}}
+  {{value | streak}}
 </span>
 <span *ngIf="neutral"
       class="x-large">
-  {{value}}
+  {{value | streak}}
 </span>
 <span *ngIf="isCold"
       class="cold xx-large adjustPadding"
-      matTooltip="You are getting cold... (3+ losses)"
+      matTooltip="Getting cold... (3+ losses)"
       matTooltipPosition="right">
-  {{value}}
+  {{value | streak}}
 </span>
 <span *ngIf="isFrozen"
       class="very-cold-large"
-      matTooltip="You are frozen! (5+ losses)"
+      matTooltip="Frozen! (5+ losses)"
       matTooltipPosition="right">
-  {{value}}
+  {{value | streak}}
 </span>

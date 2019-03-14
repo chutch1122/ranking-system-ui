@@ -1,14 +1,9 @@
-.streak-marker {
-
+.mat-column-rank,
+.mat-column-delta,
+.mat-column-streak {
+  flex: 0 0 10%;
 }
 
-.spanny-boi {
-
-}
-
-.subflex {
-  width: 80%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.mat-column-rating {
+  flex: 0 0 15%;
 }
