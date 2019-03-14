@@ -5,4 +5,5 @@ export interface Rating {
   rating: number;
   delta: number;
   createdOn: string;
+  streak: number;
 }

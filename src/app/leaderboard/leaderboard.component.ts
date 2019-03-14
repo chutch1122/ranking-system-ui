@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import 'rxjs/add/operator/do';
-import { GameType } from '../models/game-type.model';
-import { Player } from '../models/player.model';
+import {GameType} from '../models/game-type.model';
+import {Player} from '../models/player.model';
 import * as moment from 'moment';
 
 @Component({
@@ -47,14 +47,33 @@ export class LeaderboardComponent implements OnInit {
       const ratingIndex = player.ratings.map(x => x.game).indexOf(this.game);
       const rating = player.ratings[ratingIndex].rating;
       const delta = player.ratings[ratingIndex].delta;
+      const streak = this.parseHtmlCodeForStreak(player.ratings[ratingIndex].streak);
 
       this.data.push({
         rank: i + 1,
         playerId: player.id,
         name: playerName,
         rating: rating,
-        delta: delta
+        delta: delta,
+        streak: streak
       });
+    }
+
+  }
+
+  parseHtmlCodeForStreak(streak: number): string {
+
+    switch (true) {
+      case streak > 4:
+        return '💥';
+      case streak > 2:
+        return '🔥';
+      case streak < -4:
+        return '☃';
+      case streak < 2:
+        return '❄';
+      default:
+        return '';
     }
   }
 
@@ -74,4 +93,5 @@ export class LeaderboardRow {
   name: string;
   rating: number;
   delta: number;
+  streak: string;
 }
