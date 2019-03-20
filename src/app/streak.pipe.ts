@@ -18,12 +18,12 @@ export class StreakPipe implements PipeTransform {
       return '❄';
     }
 
-    if (value >= 3) {
-      return '🔥';
-    }
-
     if (value >= 5) {
       return '💥';
+    }
+
+    if (value >= 3) {
+      return '🔥';
     }
   }
 }
