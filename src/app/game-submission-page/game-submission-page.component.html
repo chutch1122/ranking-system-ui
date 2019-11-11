@@ -6,7 +6,7 @@
       <h3>Sport</h3>
       <mat-form-field>
         <mat-select [formControl]="gameControl" placeholder="Select a game">
-          <mat-option *ngFor="let game of gameTypes" [value]="game">{{game | gameType}}
+          <mat-option *ngFor="let game of gameTypes" [value]="game">{{game.displayValue}}
           </mat-option>
         </mat-select>
       </mat-form-field>

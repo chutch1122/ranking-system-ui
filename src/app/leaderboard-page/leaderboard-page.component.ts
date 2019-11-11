@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import 'rxjs/add/operator/do';
-import { GAME_TYPES } from '../models/game-type.model';
-import { Player } from '../models/player.model';
-import { PlayerService } from '../player.service';
+import {Player} from '../models/player.model';
+import {PlayerService} from '../player.service';
+import {GameType} from '../models/gametype.model';
+import {GameTypeService} from '../gametype.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-leaderboard-page',
@@ -10,16 +12,26 @@ import { PlayerService } from '../player.service';
   styleUrls: ['./leaderboard-page.component.scss']
 })
 export class LeaderboardPageComponent implements OnInit {
-  gameTypes = GAME_TYPES;
+  gameTypes: GameType[];
 
   players: Player[] = [];
 
-  constructor(private playerService: PlayerService) {
+  constructor(
+    private playerService: PlayerService,
+    private gameTypeService: GameTypeService
+  ) {
   }
 
   ngOnInit() {
-    this.playerService.all()
-      .do(x => this.players = x)
-      .subscribe();
+    let observables = [
+      this.gameTypeService.getAllGameTypes(),
+      this.playerService.all()
+    ];
+
+    Observable.forkJoin(observables)
+      .subscribe(x => {
+        this.gameTypes = x[0];
+        this.players = x[1];
+      });
   }
 }

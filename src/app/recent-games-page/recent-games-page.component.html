@@ -2,10 +2,10 @@
   <div class="game-list" *ngFor="let type of gameTypes">
     <mat-card>
       <mat-card-content>
-        <h1>{{ type | gameType }}</h1>
+        <h1>{{ type.displayValue}}</h1>
         <app-game-list
           [type]="type"
-          [games]="gameTypeToGames.get(type)"
+          [games]="gameTypeToGames.get(type.typeName)"
         ></app-game-list>
       </mat-card-content>
     </mat-card>

@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { GameType } from '../models/game-type.model';
 import { Game } from '../models/game.model';
 import { Player } from '../models/player.model';
 import { PageEvent } from '@angular/material';
+import {GameType} from '../models/gametype.model';
 
 @Component({
   selector: 'app-game-list',
@@ -36,7 +36,7 @@ export class GameListComponent {
   }
 
   getRatingDelta(player: Player): number {
-    return player.ratings.filter(x => x.game === this.type)[0].delta;
+    return player.ratings.filter(x => x.game === this.type.typeName)[0].delta;
   }
 
   onPageChanged(event: PageEvent): void {

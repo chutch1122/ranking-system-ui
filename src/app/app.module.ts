@@ -27,7 +27,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GameListComponent } from './game-list/game-list.component';
 import { GameSubmissionPageComponent } from './game-submission-page/game-submission-page.component';
-import { GameTypePipe } from './game-type.pipe';
 import { GameService } from './game.service';
 import { LeaderboardPageComponent } from './leaderboard-page/leaderboard-page.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
@@ -44,6 +43,7 @@ import { MostPointsWonAgainstPipe } from './most-points-won-against.pipe';
 import { GameTypeDetailsComponent } from './game-type-details/game-type-details.component';
 import { StreakComponent } from './streak/streak.component';
 import { StreakPipe } from './streak.pipe';
+import {GameTypeService} from './gametype.service';
 
 FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme);
 
@@ -59,7 +59,6 @@ FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme);
     RecentGamesPageComponent,
     NumericStoplightComponent,
     PlayerDetailsPageComponent,
-    GameTypePipe,
     PlayerRatingGraphComponent,
     MostPointsWonAgainstPipe,
     GameTypeDetailsComponent,
@@ -92,9 +91,9 @@ FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme);
     PlayerService,
     GameService,
     RatingAggregatorService,
-    GameTypePipe,
     StatsService,
     MostPointsWonAgainstPipe,
+    GameTypeService
   ],
   bootstrap: [AppComponent]
 })

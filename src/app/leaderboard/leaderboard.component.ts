@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import 'rxjs/add/operator/do';
-import { GameType } from '../models/game-type.model';
-import { Player } from '../models/player.model';
+import {GameType} from '../models/gametype.model';
+import {Player} from '../models/player.model';
 import * as moment from 'moment';
 
 @Component({
@@ -18,10 +18,10 @@ export class LeaderboardComponent implements OnInit {
 
   @Input() set players(data: Player[]) {
     const filtered = data
-      .filter(x => {
-        const matching = x.ratings
-          .map(y => y.game)
-          .filter(y => y === this.game);
+      .filter(player => {
+        const matching = player.ratings
+          .map(rating => rating.game)
+          .filter(gameTypeName => gameTypeName === this.game.typeName);
 
         return matching.length === 1;
       })
@@ -32,11 +32,10 @@ export class LeaderboardComponent implements OnInit {
         return mostRecent.isAfter(twoMonthsAgo);
       });
 
-
     const sorted: Player[] = filtered
       .sort((a, b) => {
-        const aIndex = a.ratings.map(x => x.game).indexOf(this.game);
-        const bIndex = b.ratings.map(x => x.game).indexOf(this.game);
+        const aIndex = a.ratings.map(x => x.game).indexOf(this.game.typeName);
+        const bIndex = b.ratings.map(x => x.game).indexOf(this.game.typeName);
 
         const aRating = a.ratings[aIndex].rating;
         const bRating = b.ratings[bIndex].rating;
@@ -48,7 +47,7 @@ export class LeaderboardComponent implements OnInit {
     for (let i = 0; i < sorted.length; i++) {
       const player = sorted[i];
       const playerName = player.firstName + ' ' + player.lastName;
-      const ratingIndex = player.ratings.map(x => x.game).indexOf(this.game);
+      const ratingIndex = player.ratings.map(x => x.game).indexOf(this.game.typeName);
       const rating = player.ratings[ratingIndex].rating;
       const delta = player.ratings[ratingIndex].delta;
       const streak = player.ratings[ratingIndex].streak;
