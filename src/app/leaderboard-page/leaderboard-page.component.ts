@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import 'rxjs/add/operator/do';
 import {Player} from '../models/player.model';
 import {PlayerService} from '../player.service';
-import {GameType} from '../models/gametype.model';
-import {GameTypeService} from '../gametype.service';
+import {GameType} from '../models/game-type.model';
+import {GameTypeService} from '../game-type.service';
 import {Observable} from 'rxjs';
 
 @Component({

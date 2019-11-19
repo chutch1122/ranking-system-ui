@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import * as moment from 'moment';
 import {Rating} from './models/rating.model';
-import {GameType} from './models/gametype.model';
+import {GameType} from './models/game-type.model';
 
 type Moment = moment.Moment;
 

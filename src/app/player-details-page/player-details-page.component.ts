@@ -7,12 +7,12 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/zip';
 import {GameService} from '../game.service';
-import {GameType} from '../models/gametype.model';
+import {GameType} from '../models/game-type.model';
 import {Game} from '../models/game.model';
 import {Player} from '../models/player.model';
 import {PlayerService} from '../player.service';
 import {AggregatedRatings, RatingAggregatorService} from '../rating-aggregator.service';
-import {GameTypeService} from '../gametype.service';
+import {GameTypeService} from '../game-type.service';
 
 @Component({
   selector: 'app-player-details-page',

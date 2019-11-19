@@ -43,7 +43,8 @@ import { MostPointsWonAgainstPipe } from './most-points-won-against.pipe';
 import { GameTypeDetailsComponent } from './game-type-details/game-type-details.component';
 import { StreakComponent } from './streak/streak.component';
 import { StreakPipe } from './streak.pipe';
-import {GameTypeService} from './gametype.service';
+import {GameTypeService} from './game-type.service';
+import { GameConfigurationComponent } from './game-configuration/game-configuration.component';
 
 FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme);
 
@@ -63,7 +64,8 @@ FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme);
     MostPointsWonAgainstPipe,
     GameTypeDetailsComponent,
     StreakComponent,
-    StreakPipe
+    StreakPipe,
+    GameConfigurationComponent
   ],
   imports: [
     AppRoutingModule,

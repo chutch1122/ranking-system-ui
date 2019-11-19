@@ -5,6 +5,7 @@ import { LeaderboardPageComponent } from './leaderboard-page/leaderboard-page.co
 import { PlayerDetailsPageComponent } from './player-details-page/player-details-page.component';
 import { PlayerSubmissionComponent } from './player-submission/player-submission.component';
 import { RecentGamesPageComponent } from './recent-games-page/recent-games-page.component';
+import {GameConfigurationComponent} from './game-configuration/game-configuration.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,10 @@ const routes: Routes = [
   {
     path: 'players/:id',
     component: PlayerDetailsPageComponent
+  },
+  {
+    path: 'games/configure',
+    component: GameConfigurationComponent
   },
 ];
 

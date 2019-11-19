@@ -2,7 +2,8 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {environment} from '../environments/environment';
-import {GameType} from './models/gametype.model';
+import {GameType} from './models/game-type.model';
+import {SubmitGameTypeRequest} from './requests/submit-game-type.request';
 
 @Injectable()
 export class GameTypeService {
@@ -11,5 +12,9 @@ export class GameTypeService {
 
   getAllGameTypes(): Observable<GameType[]> {
     return this.http.get<GameType[]>(environment.apiUrl + `/game-types`);
+  }
+
+  createGameType(request: SubmitGameTypeRequest): Observable<GameType> {
+    return this.http.post<GameType>(environment.apiUrl + `/game-types`, request)
   }
 }

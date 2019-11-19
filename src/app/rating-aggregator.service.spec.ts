@@ -2,7 +2,7 @@ import {inject, TestBed} from '@angular/core/testing';
 import {Rating} from './models/rating.model';
 
 import {RatingAggregatorService} from './rating-aggregator.service';
-import {GameType} from './models/gametype.model';
+import {GameType} from './models/game-type.model';
 
 describe('RatingAggregatorService', () => {
   const gameTypes: GameType[] = [

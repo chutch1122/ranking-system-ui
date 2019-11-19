@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import * as moment from 'moment';
 import {Optional} from '../helpers';
-import {GameType} from '../models/gametype.model';
+import {GameType} from '../models/game-type.model';
 import {Rating} from '../models/rating.model';
 import {SeriesEntry} from '../models/series-entry.model';
 import {AggregatedRatings} from '../rating-aggregator.service';

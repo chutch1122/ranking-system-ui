@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Game } from '../models/game.model';
 import { Player } from '../models/player.model';
 import { PageEvent } from '@angular/material';
-import {GameType} from '../models/gametype.model';
+import {GameType} from '../models/game-type.model';
 
 @Component({
   selector: 'app-game-list',

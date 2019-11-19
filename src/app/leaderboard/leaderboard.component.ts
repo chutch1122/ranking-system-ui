@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import 'rxjs/add/operator/do';
-import {GameType} from '../models/gametype.model';
+import {GameType} from '../models/game-type.model';
 import {Player} from '../models/player.model';
 import * as moment from 'moment';
 
