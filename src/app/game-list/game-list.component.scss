@@ -3,10 +3,29 @@
   flex-direction: column;
 }
 
-.game-list--item {
+.game-list--team {
   display: flex;
   flex-direction: column;
-  padding: 0.5em;
+  justify-content: center;
+  width: 30%;
+}
+
+.game-list--player {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 8px;
+
+  &:first-child {
+    padding-top: 0
+  }
+}
+
+.game-list--item {
+  display: flex;
+  justify-content: space-between;
+  width: 97%;
+  padding: 8px;
+  align-items: center;
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 
   &:last-child {
@@ -22,15 +41,10 @@
   }
 }
 
-.game-list--row {
+.game-list--middle-badge {
   display: flex;
-  justify-content: space-between;
-}
-
-.game-list--vs {
-  display: flex;
-  font-weight: 500;
-  text-align: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .caption {
@@ -43,28 +57,22 @@
   }
 }
 
-.line {
-  margin-top: 0.65em;
+.game-list--vs-line {
   margin-left: 10px;
   margin-right: 10px;
   height: 100%;
+  padding-bottom: 0.2em;
   width: 16px;
-  border-top: 1px solid rgba(0, 0, 0, 0.33);
+  border-top: 1px solid black;
+  display: inline-block;
 }
 
-.player-entry {
-  flex-basis: 100px;
+.game-list--victory {
 
-  &:last-child {
-    text-align: right;
-  }
 }
 
-.spacer {
-  flex: 1;
-}
-
-.player-rating {
-  flex: 1;
+.game-list--vs {
+  font-weight: 500;
+  width: 100%;
   text-align: center;
 }

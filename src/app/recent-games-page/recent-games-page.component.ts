@@ -13,6 +13,7 @@ import {GameTypeService} from '../game-type.service';
 export class RecentGamesPageComponent implements OnInit {
   gameTypes: GameType[];
   gameTypeToGames = new Map<string, Game[]>();
+  oddNumberOfGames = false;
 
   constructor(
     private gameService: GameService,
@@ -23,6 +24,7 @@ export class RecentGamesPageComponent implements OnInit {
   ngOnInit() {
     this.gameTypeService.getAllGameTypes().subscribe(x => {
       this.gameTypes = x;
+      this.oddNumberOfGames = this.gameTypes.length % 2 !== 0;
 
       this.gameTypes.forEach(x => {
         this.gameTypeToGames.set(x.typeName, []);
