@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {GameTypeService} from '../game-type.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
@@ -20,7 +20,8 @@ export class GameConfigurationComponent implements OnInit {
     private gameTypeService: GameTypeService,
     private router: Router,
     private notificationService: NotificationService
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.displayValue = new FormControl(null, Validators.required);
@@ -31,11 +32,11 @@ export class GameConfigurationComponent implements OnInit {
       displayName: this.displayValue,
       firstTeamSize: this.firstTeamSize,
       secondTeamSize: this.secondTeamSize
-    })
+    });
   }
 
   submit() {
-    if(!this.form.valid) {
+    if (!this.form.valid) {
       this.notificationService.notify('Please fill out all fields before submitting.');
       return;
     }

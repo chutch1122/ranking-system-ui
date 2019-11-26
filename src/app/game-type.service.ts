@@ -15,6 +15,6 @@ export class GameTypeService {
   }
 
   createGameType(request: SubmitGameTypeRequest): Observable<GameType> {
-    return this.http.post<GameType>(environment.apiUrl + `/game-types`, request)
+    return this.http.post<GameType>(environment.apiUrl + `/game-types`, request);
   }
 }

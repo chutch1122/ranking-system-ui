@@ -12,6 +12,11 @@ import {AggregatedRatings} from '../rating-aggregator.service';
   styleUrls: ['./player-rating-graph.component.scss']
 })
 export class PlayerRatingGraphComponent {
+  @Input() gameTypes: GameType[];
+  data: any;
+  xAxisLabel = 'Date';
+  yAxisLabel = 'Rating';
+
   @Input() set aggregatedRatings(value: AggregatedRatings) {
     if (value == null) {
       this.data = [];
@@ -20,12 +25,6 @@ export class PlayerRatingGraphComponent {
 
     this.data = this.buildDataObject(value);
   }
-
-  @Input() gameTypes: GameType[];
-
-  data: any;
-  xAxisLabel = 'Date';
-  yAxisLabel = 'Rating';
 
   private buildDataObject(aggregatedRatings: AggregatedRatings): any[] {
     const result = [];

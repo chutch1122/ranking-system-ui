@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import 'rxjs/add/operator/do';
 import {GameService} from '../game.service';
@@ -16,7 +16,7 @@ import {GameType} from '../models/game-type.model';
   styleUrls: ['./game-submission-page.component.scss']
 })
 export class GameSubmissionPageComponent implements OnInit {
-  gameTypes : GameType[];
+  gameTypes: GameType[];
 
   players: Player[];
   gameControl: FormControl;
@@ -82,7 +82,7 @@ export class GameSubmissionPageComponent implements OnInit {
 
     let totalPlayerCount = gameType.firstTeamSize + gameType.secondTeamSize;
     if (players.size !== (totalPlayerCount)) {
-      this.notificationService.notify('Please enter '+ totalPlayerCount +' distinct players in the form.');
+      this.notificationService.notify('Please enter ' + totalPlayerCount + ' distinct players in the form.');
       return;
     }
 
@@ -98,6 +98,32 @@ export class GameSubmissionPageComponent implements OnInit {
         error => this.notificationService.notify('Something went wrong submitting your game.')
       )
       .subscribe();
+  }
+
+  populateFormArrayLengths() {
+    this.firstTeam = new FormArray([]);
+    this.secondTeam = new FormArray([]);
+
+    this.firstTeam.clearValidators();
+    this.secondTeam.clearValidators();
+
+    let firstTeamSize: number = this.gameControl.value.firstTeamSize;
+    let secondTeamSize: number = this.gameControl.value.secondTeamSize;
+
+    for (let i = 0; i < firstTeamSize; i++) {
+      this.firstTeam.push(new FormControl(null, Validators.required));
+    }
+
+    for (let i = 0; i < secondTeamSize; i++) {
+      this.secondTeam.push(new FormControl(null, Validators.required));
+    }
+
+  }
+
+  inputMasking() {
+    return this.gameControl.value === null
+      || this.gameControl.value === undefined
+      || this.gameControl.value === '';
   }
 
   private generateRequest(firstTeamPlayers: number[], secondTeamPlayers: number[]) {
@@ -120,31 +146,5 @@ export class GameSubmissionPageComponent implements OnInit {
       winningTeam: 'TEAM_A'
     };
     return request;
-  }
-
-  populateFormArrayLengths() {
-    this.firstTeam = new FormArray([]);
-    this.secondTeam = new FormArray([]);
-
-    this.firstTeam.clearValidators();
-    this.secondTeam.clearValidators();
-
-    let firstTeamSize: number = this.gameControl.value.firstTeamSize;
-    let secondTeamSize: number = this.gameControl.value.secondTeamSize;
-
-    for(let i = 0; i < firstTeamSize; i++) {
-      this.firstTeam.push(new FormControl(null, Validators.required));
-    }
-
-    for(let i = 0; i < secondTeamSize; i++) {
-      this.secondTeam.push(new FormControl(null, Validators.required));
-    }
-
-  }
-
-  inputMasking() {
-    return this.gameControl.value === null
-    || this.gameControl.value === undefined
-    || this.gameControl.value === '';
   }
 }

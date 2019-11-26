@@ -8,11 +8,15 @@ describe('RatingAggregatorService', () => {
   const gameTypes: GameType[] = [
     {
       typeName: 'FOOSBALL',
-      displayValue: 'Foosball'
+      displayValue: 'Foosball',
+      firstTeamSize: 2,
+      secondTeamSize: 2
     },
     {
       typeName: 'PINGPONG',
-      displayValue: 'Ping Pong'
+      displayValue: 'Ping Pong',
+      firstTeamSize: 2,
+      secondTeamSize: 2
     }
   ];
 

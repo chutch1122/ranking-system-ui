@@ -1,16 +1,16 @@
 <div style="width: 100%; height: 100%;">
   <ngx-charts-line-chart
+    [autoScale]="true"
+    [legend]="true"
     [results]="data"
-    [xAxisLabel]="xAxisLabel"
-    [yAxisLabel]="yAxisLabel"
+    [scheme]="'fire'"
     [showXAxisLabel]="true"
     [showYAxisLabel]="true"
-    [xAxis]="true"
-    [yAxis]="true"
-    [autoScale]="true"
-    [scheme]="'fire'"
     [timeline]="true"
-    [legend]="true"
+    [xAxisLabel]="xAxisLabel"
+    [xAxis]="true"
+    [yAxisLabel]="yAxisLabel"
+    [yAxis]="true"
     legendTitle="Games"
   >
   </ngx-charts-line-chart>

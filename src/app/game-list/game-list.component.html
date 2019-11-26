@@ -1,12 +1,12 @@
 <div class="game-list--container">
-  <div class="game-list--item"
-       *ngFor="let game of pagedGames; let i = index"
-       [class.is-win]="isWin(i)"
+  <div *ngFor="let game of pagedGames; let i = index"
        [class.is-loss]="isLoss(i)"
+       [class.is-win]="isWin(i)"
+       class="game-list--item"
   >
     <!--    TODO this can be extracted later and reused per team -->
     <div class="game-list--team">
-      <div class="game-list--player" *ngFor="let player of game.teamA">
+      <div *ngFor="let player of game.teamA" class="game-list--player">
         <div class="game-list--player-name">
           <a href="/players/{{player.id}}">
             {{ getFullName(player) }}
@@ -29,7 +29,7 @@
     </div>
 
     <div class="game-list--team">
-      <div class="game-list--player" *ngFor="let player of game.teamB">
+      <div *ngFor="let player of game.teamB" class="game-list--player">
         <div class="game-list--player-name">
           <a href="/players/{{player.id}}">
             {{ getFullName(player) }}
@@ -41,9 +41,9 @@
       </div>
     </div>
 
-  <mat-paginator *ngIf="games.length > pageSizes[0]"
-                 [pageSizeOptions]="pageSizes"
-                 [length]="games.length"
-                 (page)="onPageChanged($event)">
-  </mat-paginator>
-</div>
+    <mat-paginator (page)="onPageChanged($event)"
+                   *ngIf="games.length > pageSizes[0]"
+                   [length]="games.length"
+                   [pageSizeOptions]="pageSizes">
+    </mat-paginator>
+  </div>

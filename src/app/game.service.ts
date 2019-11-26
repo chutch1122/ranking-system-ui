@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { environment } from '../environments/environment';
-import { Game } from './models/game.model';
-import { SubmitGameRequest } from './requests/submit-game.request';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import {environment} from '../environments/environment';
+import {Game} from './models/game.model';
+import {SubmitGameRequest} from './requests/submit-game.request';
 
 @Injectable()
 export class GameService {

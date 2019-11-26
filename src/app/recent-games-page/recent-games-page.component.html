@@ -1,16 +1,16 @@
 <div class="game-lists">
-  <div class="game-list" *ngFor="let type of gameTypes">
+  <div *ngFor="let type of gameTypes" class="game-list">
     <mat-card>
       <mat-card-content>
         <h1>{{ type.displayValue}}</h1>
         <app-game-list
-          [type]="type"
           [games]="gameTypeToGames.get(type.typeName)"
+          [type]="type"
         ></app-game-list>
       </mat-card-content>
     </mat-card>
   </div>
 
-  <div class="spacer" *ngIf="oddNumberOfGames"></div>
+  <div *ngIf="oddNumberOfGames" class="spacer"></div>
 
 </div>

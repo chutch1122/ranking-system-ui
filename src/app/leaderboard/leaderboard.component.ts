@@ -16,6 +16,9 @@ export class LeaderboardComponent implements OnInit {
 
   data: LeaderboardRow[];
 
+  constructor() {
+  }
+
   @Input() set players(data: Player[]) {
     const filtered = data
       .filter(player => {
@@ -62,9 +65,6 @@ export class LeaderboardComponent implements OnInit {
       });
     }
 
-  }
-
-  constructor() {
   }
 
   ngOnInit() {
