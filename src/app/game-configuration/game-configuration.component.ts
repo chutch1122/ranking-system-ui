@@ -12,7 +12,6 @@ import {SubmitGameTypeRequest} from '../requests/submit-game-type.request';
 })
 export class GameConfigurationComponent implements OnInit {
   displayValue: FormControl;
-  startingSeason: FormControl;
   firstTeamSize: FormControl;
   secondTeamSize: FormControl;
   form: FormGroup;
@@ -25,13 +24,11 @@ export class GameConfigurationComponent implements OnInit {
 
   ngOnInit() {
     this.displayValue = new FormControl(null, Validators.required);
-    this.startingSeason = new FormControl(null, Validators.required);
     this.firstTeamSize = new FormControl(null, Validators.required);
     this.secondTeamSize = new FormControl(null, Validators.required);
 
     this.form = new FormGroup({
       displayName: this.displayValue,
-      startingSeason: this.startingSeason,
       firstTeamSize: this.firstTeamSize,
       secondTeamSize: this.secondTeamSize
     })
@@ -39,24 +36,24 @@ export class GameConfigurationComponent implements OnInit {
 
   submit() {
     if(!this.form.valid) {
-      this.notificationService.notify('Please fill out all fields before submitting.')
+      this.notificationService.notify('Please fill out all fields before submitting.');
       return;
     }
 
     const request: SubmitGameTypeRequest = {
       displayValue: this.displayValue.value,
-      startingSeason: this.startingSeason.value,
       firstTeamSize: this.firstTeamSize.value,
+      startingSeason: 1,
       secondTeamSize: this.secondTeamSize.value
     };
 
     this.gameTypeService.createGameType(request).do(
-      success => {
+      () => {
         this.notificationService.notify('New game type created!');
         this.form.reset();
         this.router.navigate(['/leaderboards']);
       },
-      error => this.notificationService.notify('Something went wrong creating your game type.')
+      () => this.notificationService.notify('Something went wrong creating your game type.')
     )
       .subscribe();
   }

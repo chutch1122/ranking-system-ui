@@ -2,11 +2,11 @@
   display: flex;
   flex-wrap: wrap;
 }
-// TODO: styling to handle the last child, when odd, not aligning with other lists
+
 .game-list {
   flex: 1;
   padding: 1em;
-  flex-basis: 300px;
+  flex-basis: 45%;
 
   &:last-of-type {
     padding-left: 0;
@@ -14,6 +14,5 @@
 }
 
 .spacer {
-  flex: 1;
-  flex-basis: 300px;
+  flex-basis: 50%;
 }

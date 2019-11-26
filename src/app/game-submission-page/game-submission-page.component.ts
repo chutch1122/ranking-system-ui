@@ -35,14 +35,14 @@ export class GameSubmissionPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.gameControl = new FormControl(null, Validators.required); //TODO you changed this from Foosball
-    this.winningTeamControl = new FormControl('TEAM_A', Validators.required);
+    this.gameControl = new FormControl(null, Validators.required);
+    this.winningTeamControl = new FormControl(null, Validators.required);
 
     this.form = new FormGroup({
       game: this.gameControl,
       firstTeam: this.firstTeam,
       secondTeam: this.secondTeam,
-
+      winningTeam: this.winningTeamControl,
     });
 
     this.playerService.all()
@@ -50,7 +50,6 @@ export class GameSubmissionPageComponent implements OnInit {
         this.players = x.sort((a, b) => {
           const aName = a.firstName + ' ' + a.lastName;
           const bName = b.firstName + ' ' + b.lastName;
-
           return aName.localeCompare(bName);
         });
       })

@@ -13,6 +13,7 @@ import {Observable} from 'rxjs';
 })
 export class LeaderboardPageComponent implements OnInit {
   gameTypes: GameType[];
+  oddNumberOfGames = false;
 
   players: Player[] = [];
 
@@ -32,6 +33,8 @@ export class LeaderboardPageComponent implements OnInit {
       .subscribe(x => {
         this.gameTypes = x[0];
         this.players = x[1];
+
+        this.oddNumberOfGames = this.gameTypes.length % 2 !== 0;
       });
   }
 }
