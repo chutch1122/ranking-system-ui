@@ -6,6 +6,7 @@ import {PlayerDetailsPageComponent} from './player-details-page/player-details-p
 import {PlayerSubmissionComponent} from './player-submission/player-submission.component';
 import {RecentGamesPageComponent} from './recent-games-page/recent-games-page.component';
 import {GameConfigurationComponent} from './game-configuration/game-configuration.component';
+import {SeasonConfigurationComponent} from './season-configuration/season-configuration.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
     path: 'games/configure',
     component: GameConfigurationComponent
   },
+  {
+    path: 'games/seasons',
+    component: SeasonConfigurationComponent
+  }
 ];
 
 @NgModule({

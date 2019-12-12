@@ -32,17 +32,23 @@ export class RecentGamesPageComponent implements OnInit {
 
       this.gameTypes.forEach(type => {
         this.gameService.recent(type.typeName)
-          .do(x => this.setGamesList(type.typeName, x))
+          .do(x => this.setGamesList(type.typeName, type.season, x))
           .subscribe();
       });
     });
   }
 
-  setGamesList(type: string, games: Game[]) {
+  setGamesList(type: string, season: number, games: Game[]) {
     if (games === undefined) {
       games = [];
     }
 
-    this.gameTypeToGames.set(type, games);
+    let filteredGames = games.filter(x => x.seasonNumber === season);
+
+    this.gameTypeToGames.set(type, filteredGames);
+  }
+
+  hasGames(type: string): boolean {
+    return this.gameTypeToGames.get(type).length > 0;
   }
 }

@@ -45,6 +45,7 @@ import {StreakComponent} from './streak/streak.component';
 import {StreakPipe} from './streak.pipe';
 import {GameTypeService} from './game-type.service';
 import {GameConfigurationComponent} from './game-configuration/game-configuration.component';
+import { SeasonConfigurationComponent } from './season-configuration/season-configuration.component';
 
 FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme);
 
@@ -65,7 +66,8 @@ FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme);
     GameTypeDetailsComponent,
     StreakComponent,
     StreakPipe,
-    GameConfigurationComponent
+    GameConfigurationComponent,
+    SeasonConfigurationComponent
   ],
   imports: [
     AppRoutingModule,

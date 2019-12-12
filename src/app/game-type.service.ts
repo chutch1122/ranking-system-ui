@@ -17,4 +17,8 @@ export class GameTypeService {
   createGameType(request: SubmitGameTypeRequest): Observable<GameType> {
     return this.http.post<GameType>(environment.apiUrl + `/game-types`, request);
   }
+
+  incrementSeason(gameType: string): Observable<any> {
+    return this.http.put(environment.apiUrl + `/game-types/season-increment/${gameType}`, null);
+  }
 }

@@ -3,7 +3,12 @@
     <h1>Game Submission</h1>
     <form>
 
-      <h3>Game Details</h3>
+      <h3 class="game-details-header">Game Details</h3>
+      <div class="game-details-explanation">
+        When inputting a new game type, you do not need the player counts in the name; those are appended
+        automatically.
+        (e.g. use "Ping Pong" as the name instead of "Ping Pong 1v1")
+      </div>
       <mat-form-field>
         <input [formControl]="displayValue" matInput placeholder="Game Name">
       </mat-form-field>

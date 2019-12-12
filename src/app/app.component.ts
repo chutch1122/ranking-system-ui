@@ -12,5 +12,6 @@ export class AppComponent {
     {label: 'Game Submission', link: '/games/create'},
     {label: 'Player Registration', link: '/players/create'},
     {label: 'Game Configuration', link: '/games/configure'},
+    {label: 'Season Configuration', link: '/games/seasons'},
   ];
 }

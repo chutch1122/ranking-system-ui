@@ -3,4 +3,5 @@ export interface GameType {
   displayValue: string;
   firstTeamSize: number;
   secondTeamSize: number;
+  season: number;
 }

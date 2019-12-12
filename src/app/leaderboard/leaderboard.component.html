@@ -1,50 +1,59 @@
 <mat-card>
   <mat-card-content>
-    <h1>{{game.displayValue}}</h1>
+    <div class="leaderboard-game-type">
+      <h1 class="leaderboard-game-name">{{game.displayValue}} {{game.firstTeamSize}}v{{game.secondTeamSize}}</h1>
+      <div class="leaderboard-season-text">SEASON {{game.season}}</div>
+    </div>
 
-    <mat-table #table [dataSource]="data">
+    <div *ngIf="hasData">
+      <mat-table #table [dataSource]="data">
 
-      <!--- Note that these columns can be defined in any order.
-            The actual rendered columns are set as a property on the row definition" -->
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
 
-      <!-- Position Column -->
-      <ng-container matColumnDef="rank">
-        <mat-header-cell *matHeaderCellDef> Rank</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.rank}}</mat-cell>
-      </ng-container>
+        <!-- Position Column -->
+        <ng-container matColumnDef="rank">
+          <mat-header-cell *matHeaderCellDef> Rank</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.rank}}</mat-cell>
+        </ng-container>
 
-      <!-- Name Column -->
-      <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <a href="/players/{{element.playerId}}">{{element.name}}</a>
-        </mat-cell>
-      </ng-container>
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <a href="/players/{{element.playerId}}">{{element.name}}</a>
+          </mat-cell>
+        </ng-container>
 
-      <!-- Streak Column -->
-      <ng-container matColumnDef="streak">
-        <mat-header-cell *matHeaderCellDef></mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <app-streak [value]="element.streak"></app-streak>
-        </mat-cell>
-      </ng-container>
+        <!-- Streak Column -->
+        <ng-container matColumnDef="streak">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <app-streak [value]="element.streak"></app-streak>
+          </mat-cell>
+        </ng-container>
 
-      <!-- Weight Column -->
-      <ng-container matColumnDef="rating">
-        <mat-header-cell *matHeaderCellDef> Rating</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.rating}}</mat-cell>
-      </ng-container>
+        <!-- Weight Column -->
+        <ng-container matColumnDef="rating">
+          <mat-header-cell *matHeaderCellDef> Rating</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.rating}}</mat-cell>
+        </ng-container>
 
-      <!-- Delta Column -->
-      <ng-container matColumnDef="delta">
-        <mat-header-cell *matHeaderCellDef> Delta</mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <app-numeric-stoplight [value]="element.delta"></app-numeric-stoplight>
-        </mat-cell>
-      </ng-container>
+        <!-- Delta Column -->
+        <ng-container matColumnDef="delta">
+          <mat-header-cell *matHeaderCellDef> Delta</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <app-numeric-stoplight [value]="element.delta"></app-numeric-stoplight>
+          </mat-cell>
+        </ng-container>
 
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+
+    <div *ngIf="!hasData">
+      No games played yet this season!
+    </div>
   </mat-card-content>
 </mat-card>

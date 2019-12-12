@@ -16,3 +16,18 @@
 .spacer {
   flex-basis: 50%;
 }
+
+.recent-games-game-type {
+  display: flex;
+  flex-direction: column;
+}
+
+.recent-games-game-name {
+  margin-bottom: 0;
+}
+
+.recent-games-season-text {
+  font-size: smaller;
+  color: rgba(0, 0, 0, 0.33);
+  margin-bottom: 1.5em
+}

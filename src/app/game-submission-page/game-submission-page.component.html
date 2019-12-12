@@ -7,7 +7,7 @@
       <mat-form-field>
         <mat-select (selectionChange)="populateFormArrayLengths()" [formControl]="gameControl"
                     placeholder="Select a game">
-          <mat-option *ngFor="let game of gameTypes" [value]="game">{{game.displayValue}}
+          <mat-option *ngFor="let game of gameTypes" [value]="game">{{game.displayValue}} {{game.firstTeamSize}}v{{game.secondTeamSize}}
           </mat-option>
         </mat-select>
       </mat-form-field>

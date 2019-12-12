@@ -15,6 +15,7 @@ export class LeaderboardComponent implements OnInit {
   displayedColumns = ['rank', 'streak', 'name', 'rating', 'delta'];
 
   data: LeaderboardRow[];
+  hasData: boolean = false;
 
   constructor() {
   }
@@ -63,6 +64,10 @@ export class LeaderboardComponent implements OnInit {
         delta: delta,
         streak: streak
       });
+
+      if(data.length > 0) {
+        this.hasData = true;
+      }
     }
 
   }

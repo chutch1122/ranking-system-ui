@@ -2,15 +2,19 @@
   <div *ngFor="let type of gameTypes" class="game-list">
     <mat-card>
       <mat-card-content>
-        <h1>{{ type.displayValue}}</h1>
-        <app-game-list
-          [games]="gameTypeToGames.get(type.typeName)"
-          [type]="type"
-        ></app-game-list>
+        <div class="recent-games-game-type">
+          <h1 class="recent-games-game-name">{{type.displayValue}} {{type.firstTeamSize}}v{{type.secondTeamSize}}</h1>
+          <div class="recent-games-season-text">SEASON {{type.season}}</div>
+        </div>
+        <div *ngIf="hasGames(type.typeName)">
+          <app-game-list
+            [games]="gameTypeToGames.get(type.typeName)"
+            [type]="type"
+          ></app-game-list>
+        </div>
+        <div *ngIf="!hasGames(type.typeName)">No games played yet this season!</div>
       </mat-card-content>
     </mat-card>
   </div>
-
   <div *ngIf="oddNumberOfGames" class="spacer"></div>
-
 </div>
