@@ -7,3 +7,18 @@
 .mat-column-rating {
   flex: 0 0 15%;
 }
+
+.leaderboard-game-type {
+  display: flex;
+  flex-direction: column;
+}
+
+.leaderboard-game-name {
+  margin-bottom: 0;
+}
+
+.leaderboard-season-text {
+  font-size: smaller;
+  color: rgba(0, 0, 0, 0.33);
+  margin-bottom: 1.5em
+}

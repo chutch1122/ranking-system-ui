@@ -1,18 +1,22 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import * as moment from 'moment';
-import { GameTypePipe } from '../game-type.pipe';
-import { Optional } from '../helpers';
-import { GAME_TYPES, GameType } from '../models/game-type.model';
-import { Rating } from '../models/rating.model';
-import { SeriesEntry } from '../models/series-entry.model';
-import { AggregatedRatings } from '../rating-aggregator.service';
+import {Optional} from '../helpers';
+import {GameType} from '../models/game-type.model';
+import {Rating} from '../models/rating.model';
+import {SeriesEntry} from '../models/series-entry.model';
+import {AggregatedRatings} from '../rating-aggregator.service';
 
 @Component({
   selector: 'app-player-rating-graph',
   templateUrl: './player-rating-graph.component.html',
   styleUrls: ['./player-rating-graph.component.scss']
 })
-export class PlayerRatingGraphComponent implements OnInit {
+export class PlayerRatingGraphComponent {
+  @Input() gameTypes: GameType[];
+  data: any;
+  xAxisLabel = 'Date';
+  yAxisLabel = 'Rating';
+
   @Input() set aggregatedRatings(value: AggregatedRatings) {
     if (value == null) {
       this.data = [];
@@ -22,21 +26,16 @@ export class PlayerRatingGraphComponent implements OnInit {
     this.data = this.buildDataObject(value);
   }
 
-  data: any;
-  xAxisLabel = 'Date';
-  yAxisLabel = 'Rating';
-
-  constructor(private gameTypePipe: GameTypePipe) {
-  }
-
-  ngOnInit() {
-  }
-
   private buildDataObject(aggregatedRatings: AggregatedRatings): any[] {
     const result = [];
 
-    GAME_TYPES.forEach(type => {
-      this.buildSeriesIfPresent(aggregatedRatings.gameTypeToRatings.get(type.toString()), type)
+    if (!this.gameTypes) {
+      console.error('Initialized without game types!');
+      return;
+    }
+
+    this.gameTypes.forEach(type => {
+      this.buildSeriesIfPresent(aggregatedRatings.gameTypeToRatings.get(type.typeName), type)
         .ifPresent(x => result.push(x));
     });
 
@@ -49,7 +48,7 @@ export class PlayerRatingGraphComponent implements OnInit {
     }
 
     return Optional.of({
-      'name': this.gameTypePipe.transform(gameType),
+      'name': gameType.displayValue,
       'series': ratings.map(x => <SeriesEntry>{
         name: moment.utc(x.createdOn).format('MM-DD-YYYY'),
         value: x.rating

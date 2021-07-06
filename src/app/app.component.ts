@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -11,5 +11,7 @@ export class AppComponent {
     {label: 'Recent Games', link: '/games'},
     {label: 'Game Submission', link: '/games/create'},
     {label: 'Player Registration', link: '/players/create'},
+    {label: 'Game Configuration', link: '/games/configure'},
+    {label: 'Season Configuration', link: '/games/seasons'},
   ];
 }

@@ -1,9 +1,9 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
-import { GameType } from '../models/game-type.model';
-import { Game } from '../models/game.model';
-import { PlayerStat, StatsService } from '../stats.service';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
+import {GameType} from '../models/game-type.model';
+import {Game} from '../models/game.model';
+import {PlayerStat, StatsService} from '../stats.service';
+import {ActivatedRoute, ParamMap} from '@angular/router';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Component({
   selector: 'app-game-type-details',
@@ -27,7 +27,7 @@ export class GameTypeDetailsComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap
       .switchMap((params: ParamMap) => new BehaviorSubject(+params.get('id')))
-      .do(id => this.statsService.findMostPointsWonAgainst(id, this.gameType).subscribe((x) => this.mostWonAgainst = x))
+      .do(id => this.statsService.findMostPointsWonAgainst(id, this.gameType.typeName).subscribe((x) => this.mostWonAgainst = x))
       .subscribe();
     this.cdr.detectChanges();
   }

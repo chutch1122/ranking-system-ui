@@ -1,7 +1,6 @@
-export interface GameType {
-  typeName: string;
+export interface SubmitGameTypeRequest {
   displayValue: string;
+  startingSeason: number;
   firstTeamSize: number;
   secondTeamSize: number;
-  season: number;
 }

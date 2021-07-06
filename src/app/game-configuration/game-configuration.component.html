@@ -1,0 +1,32 @@
+<mat-card class="page-with-content">
+  <mat-card-content>
+    <h1>Game Submission</h1>
+    <form>
+
+      <h3 class="game-details-header">Game Details</h3>
+      <div class="game-details-explanation">
+        When inputting a new game type, you do not need the player counts in the name; those are appended
+        automatically.
+        (e.g. use "Ping Pong" as the name instead of "Ping Pong 1v1")
+      </div>
+      <mat-form-field>
+        <input [formControl]="displayValue" matInput placeholder="Game Name">
+      </mat-form-field>
+
+      <h3>Team Sizes</h3>
+      <mat-form-field>
+        <input [formControl]="firstTeamSize" matInput placeholder="Team A Size">
+      </mat-form-field>
+
+      VS.
+
+      <mat-form-field>
+        <input [formControl]="secondTeamSize" matInput placeholder="Team B Size">
+      </mat-form-field>
+
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button (click)="submit()" mat-button>SUBMIT</button>
+  </mat-card-actions>
+</mat-card>
