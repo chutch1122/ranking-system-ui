@@ -110,6 +110,11 @@ Notes:
 - Successor: a modern rewrite is in progress (Angular 20+, refreshed UI, updated build/tooling)
 
 
+## Related
+
+- Legacy API (also deprecated):[ Ranking System API ](https://github.com/chutch1122/ranking-system-api) — backend for this UI
+
+
 ## License
 
 MIT
