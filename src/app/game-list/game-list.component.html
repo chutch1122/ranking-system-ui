@@ -1,49 +1,65 @@
 <div class="game-list--container">
-  <div *ngFor="let game of pagedGames; let i = index"
-       [class.is-loss]="isLoss(i)"
+  <div class="game-list--item"
+       *ngFor="let game of pagedGames; let i = index"
        [class.is-win]="isWin(i)"
-       class="game-list--item"
+       [class.is-loss]="isLoss(i)"
   >
-    <!--    TODO this can be extracted later and reused per team -->
-    <div class="game-list--team">
-      <div *ngFor="let player of game.teamA" class="game-list--player">
-        <div class="game-list--player-name">
-          <a href="/players/{{player.id}}">
-            {{ getFullName(player) }}
-          </a>
-        </div>
-        <div class="game-list--player-rating">
-          <app-numeric-stoplight [value]="getRatingDelta(player)"></app-numeric-stoplight>
-        </div>
+    <div class="game-list--row">
+      <div class="player-entry">
+        <a href="/players/{{game.teamA[0].id}}">
+          {{ getFullName(game.teamA[0]) }}
+        </a>
+      </div>
+      <div class="player-rating">
+        <app-numeric-stoplight [value]="getRatingDelta(game.teamA[0])"></app-numeric-stoplight>
+      </div>
+      <div class="spacer"></div>
+      <div class="caption">VICTORY</div>
+      <div class="spacer"></div>
+      <div class="player-rating">
+        <app-numeric-stoplight [value]="getRatingDelta(game.teamA[1])"></app-numeric-stoplight>
+      </div>
+
+      <div class="player-entry">
+        <a href="/players/{{game.teamA[1].id}}">
+          {{ getFullName(game.teamA[1]) }}
+        </a>
       </div>
     </div>
 
-    <div class="game-list--middle-badge">
-      <div class="game-list--victory caption">VICTORY</div>
-      <div class="game-list--vs">
-        <span class="game-list--vs-line"></span>
-        vs
-        <span class="game-list--vs-line"></span>
-      </div>
-      <div class="game-list--defeat caption">DEFEAT</div>
+    <div class="game-list--vs">
+      <div class="spacer"></div>
+      <span class="line"></span>
+      vs
+      <span class="line"></span>
+      <div class="spacer"></div>
     </div>
 
-    <div class="game-list--team">
-      <div *ngFor="let player of game.teamB" class="game-list--player">
-        <div class="game-list--player-name">
-          <a href="/players/{{player.id}}">
-            {{ getFullName(player) }}
-          </a>
-        </div>
-        <div class="game-list--player-rating">
-          <app-numeric-stoplight [value]="getRatingDelta(player)"></app-numeric-stoplight>
-        </div>
+    <div class="game-list--row">
+      <div class="player-entry">
+        <a href="/players/{{game.teamB[0].id}}">
+          {{ getFullName(game.teamB[0]) }}
+        </a>
+      </div>
+      <div class="player-rating">
+        <app-numeric-stoplight [value]="getRatingDelta(game.teamB[0])"></app-numeric-stoplight>
+      </div>
+      <div class="spacer"></div>
+      <div class="caption">DEFEAT</div>
+      <div class="spacer"></div>
+      <div class="player-rating">
+        <app-numeric-stoplight [value]="getRatingDelta(game.teamB[1])"></app-numeric-stoplight>
+      </div>
+      <div class="player-entry">
+        <a href="/players/{{game.teamB[1].id}}">
+          {{ getFullName(game.teamB[1]) }}
+        </a>
       </div>
     </div>
-
-    <mat-paginator (page)="onPageChanged($event)"
-                   *ngIf="games.length > pageSizes[0]"
-                   [length]="games.length"
-                   [pageSizeOptions]="pageSizes">
-    </mat-paginator>
   </div>
+  <mat-paginator *ngIf="games.length > pageSizes[0]"
+                 [pageSizeOptions]="pageSizes"
+                 [length]="games.length"
+                 (page)="onPageChanged($event)">
+  </mat-paginator>
+</div>

@@ -1,4 +1,4 @@
-import {Rating} from './rating.model';
+import { Rating } from './rating.model';
 
 export interface Player {
   id: number;

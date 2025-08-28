@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
-import {Player} from '../models/player.model';
-import {NotificationService} from '../notification.service';
-import {PlayerService} from '../player.service';
-import {SubmitPlayerRequest} from '../requests/submit-player.request';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Player } from '../models/player.model';
+import { NotificationService } from '../notification.service';
+import { PlayerService } from '../player.service';
+import { SubmitPlayerRequest } from '../requests/submit-player.request';
 
 @Component({
   selector: 'app-player-submission',

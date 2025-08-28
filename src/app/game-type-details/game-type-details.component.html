@@ -1,5 +1,5 @@
 <div>
-  <h3>{{ gameType.displayValue}}</h3>
+  <h3>{{ gameType | gameType }}</h3>
   <p><strong>Rating: </strong> {{rating}}</p>
   <p><strong>Win Ratio: </strong> {{getWinLoss(games)}}</p>
   <p *ngIf="hasWins">
@@ -8,7 +8,7 @@
     </strong>
     <span *ngIf="mostWonAgainst">
           {{ mostWonAgainst.player.firstName }}
-      {{ mostWonAgainst.player.lastName[0] }}.
+          {{ mostWonAgainst.player.lastName[0] }}.
           ({{ mostWonAgainst.stat }} points)
           </span>
   </p>

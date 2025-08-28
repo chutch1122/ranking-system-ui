@@ -6,13 +6,9 @@
 .leaderboard {
   flex: 1;
   padding: 1em;
-  flex-basis: 45%;
+  flex-basis: 300px;
 
   &:last-of-type {
     padding-left: 0;
   }
-}
-
-.spacer {
-  flex-basis: 50%;
 }

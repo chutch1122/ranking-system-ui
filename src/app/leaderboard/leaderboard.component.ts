@@ -1,7 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import 'rxjs/add/operator/do';
-import {GameType} from '../models/game-type.model';
-import {Player} from '../models/player.model';
+import { GameType } from '../models/game-type.model';
+import { Player } from '../models/player.model';
 import * as moment from 'moment';
 
 @Component({
@@ -15,17 +15,13 @@ export class LeaderboardComponent implements OnInit {
   displayedColumns = ['rank', 'streak', 'name', 'rating', 'delta'];
 
   data: LeaderboardRow[];
-  hasData: boolean = false;
-
-  constructor() {
-  }
 
   @Input() set players(data: Player[]) {
     const filtered = data
-      .filter(player => {
-        const matching = player.ratings
-          .map(rating => rating.game)
-          .filter(gameTypeName => gameTypeName === this.game.typeName);
+      .filter(x => {
+        const matching = x.ratings
+          .map(y => y.game)
+          .filter(y => y === this.game);
 
         return matching.length === 1;
       })
@@ -36,10 +32,11 @@ export class LeaderboardComponent implements OnInit {
         return mostRecent.isAfter(twoMonthsAgo);
       });
 
+
     const sorted: Player[] = filtered
       .sort((a, b) => {
-        const aIndex = a.ratings.map(x => x.game).indexOf(this.game.typeName);
-        const bIndex = b.ratings.map(x => x.game).indexOf(this.game.typeName);
+        const aIndex = a.ratings.map(x => x.game).indexOf(this.game);
+        const bIndex = b.ratings.map(x => x.game).indexOf(this.game);
 
         const aRating = a.ratings[aIndex].rating;
         const bRating = b.ratings[bIndex].rating;
@@ -51,7 +48,7 @@ export class LeaderboardComponent implements OnInit {
     for (let i = 0; i < sorted.length; i++) {
       const player = sorted[i];
       const playerName = player.firstName + ' ' + player.lastName;
-      const ratingIndex = player.ratings.map(x => x.game).indexOf(this.game.typeName);
+      const ratingIndex = player.ratings.map(x => x.game).indexOf(this.game);
       const rating = player.ratings[ratingIndex].rating;
       const delta = player.ratings[ratingIndex].delta;
       const streak = player.ratings[ratingIndex].streak;
@@ -64,12 +61,11 @@ export class LeaderboardComponent implements OnInit {
         delta: delta,
         streak: streak
       });
-
-      if(data.length > 0) {
-        this.hasData = true;
-      }
     }
 
+  }
+
+  constructor() {
   }
 
   ngOnInit() {

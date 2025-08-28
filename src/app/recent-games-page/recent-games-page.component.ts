@@ -1,9 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import 'rxjs/add/operator/do';
-import {GameService} from '../game.service';
-import {Game} from '../models/game.model';
-import {GameType} from '../models/game-type.model';
-import {GameTypeService} from '../game-type.service';
+import { GameService } from '../game.service';
+import { GAME_TYPES } from '../models/game-type.model';
+import { Game } from '../models/game.model';
 
 @Component({
   selector: 'app-recent-games-page',
@@ -11,44 +10,29 @@ import {GameTypeService} from '../game-type.service';
   styleUrls: ['./recent-games-page.component.scss']
 })
 export class RecentGamesPageComponent implements OnInit {
-  gameTypes: GameType[];
+  gameTypes = GAME_TYPES;
   gameTypeToGames = new Map<string, Game[]>();
-  oddNumberOfGames = false;
 
-  constructor(
-    private gameService: GameService,
-    private gameTypeService: GameTypeService
-  ) {
+  constructor(private gameService: GameService) {
   }
 
   ngOnInit() {
-    this.gameTypeService.getAllGameTypes().subscribe(x => {
-      this.gameTypes = x;
-      this.oddNumberOfGames = this.gameTypes.length % 2 !== 0;
+    this.gameTypes.forEach(x => {
+      this.gameTypeToGames.set(x.toString(), []);
+    });
 
-      this.gameTypes.forEach(x => {
-        this.gameTypeToGames.set(x.typeName, []);
-      });
-
-      this.gameTypes.forEach(type => {
-        this.gameService.recent(type.typeName)
-          .do(x => this.setGamesList(type.typeName, type.season, x))
-          .subscribe();
-      });
+    this.gameTypes.forEach(type => {
+      this.gameService.recent(type.toString())
+        .do(x => this.setGamesList(type.toString(), x))
+        .subscribe();
     });
   }
 
-  setGamesList(type: string, season: number, games: Game[]) {
+  setGamesList(type: string, games: Game[]) {
     if (games === undefined) {
       games = [];
     }
 
-    let filteredGames = games.filter(x => x.seasonNumber === season);
-
-    this.gameTypeToGames.set(type, filteredGames);
-  }
-
-  hasGames(type: string): boolean {
-    return this.gameTypeToGames.get(type).length > 0;
+    this.gameTypeToGames.set(type, games);
   }
 }

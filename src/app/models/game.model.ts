@@ -1,8 +1,8 @@
-import {Player} from './player.model';
+import { Player } from './player.model';
 
 export interface Game {
   id: number;
-  seasonNumber: number;
+  seasonId: number;
   gameType: string;
   teamA: Player[];
   teamB: Player[];

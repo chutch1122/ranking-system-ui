@@ -2,22 +2,21 @@
   <h1>{{ player?.firstName }} {{ player?.lastName }}</h1>
 </div>
 
-<div *ngIf="player" class="page-with-content stats-and-history">
+<div class="page-with-content stats-and-history" *ngIf="player">
   <mat-card>
     <mat-card-content>
       <div style="width: 100%; height: 400px;">
         <app-player-rating-graph
           [aggregatedRatings]="aggregatedRatings"
-          [gameTypes]="gameTypes"
         ></app-player-rating-graph>
       </div>
 
       <div *ngFor="let type of getTypesPlayerHasGamesFor()">
         <app-game-type-details
           [gameType]="type"
-          [games]="gameTypeToGames.get(type.typeName)"
-          [playerId]="player.id"
           [rating]="getRating(type)"
+          [games]="gameTypeToGames.get(type.toString())"
+          [playerId]="player.id"
         >
         </app-game-type-details>
       </div>
@@ -29,11 +28,11 @@
     <mat-card-content>
       <mat-tab-group>
         <div *ngFor="let type of gameTypes">
-          <mat-tab *ngIf="hasRating(type)" label="{{ type.displayValue }}">
+          <mat-tab label="{{ type | gameType }}" *ngIf="hasRating(type)">
             <app-game-list
-              [games]="getGamesForType(type)"
               [playerId]="player.id"
               [type]="type"
+              [games]="getGamesForType(type)"
             ></app-game-list>
           </mat-tab>
         </div>

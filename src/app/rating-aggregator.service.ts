@@ -1,21 +1,26 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import * as moment from 'moment';
-import {Rating} from './models/rating.model';
-import {GameType} from './models/game-type.model';
+import { Rating } from './models/rating.model';
+import { GAME_TYPES } from './models/game-type.model';
 
 type Moment = moment.Moment;
 
 @Injectable()
 export class RatingAggregatorService {
-  aggregate(type: string, ratingsByGameType: Map<string, Rating[]>, gameTypes: GameType[]): AggregatedRatings {
+  gameTypes = GAME_TYPES;
+
+  constructor() {
+  }
+
+  aggregate(type: string, ratingsByGameType: Map<string, Rating[]>): AggregatedRatings {
     const dates = this.getDistinctDates(ratingsByGameType);
     const result = new Map<string, Rating[]>();
-    gameTypes.forEach(x => {
-      result.set(x.typeName, []);
+    this.gameTypes.forEach(x => {
+      result.set(x.toString(), []);
     });
 
-    gameTypes.filter(x => ratingsByGameType.has(x.typeName)).forEach(gameType => {
-      result.set(gameType.typeName, this.fillRatingsForGame(dates, ratingsByGameType.get(gameType.typeName)));
+    this.gameTypes.filter(x => ratingsByGameType.has(x)).forEach(gameType => {
+      result.set(gameType, this.fillRatingsForGame(dates, ratingsByGameType.get(gameType)));
     });
 
     return {gameTypeToRatings: result};

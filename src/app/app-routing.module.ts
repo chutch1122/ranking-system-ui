@@ -1,12 +1,10 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {GameSubmissionPageComponent} from './game-submission-page/game-submission-page.component';
-import {LeaderboardPageComponent} from './leaderboard-page/leaderboard-page.component';
-import {PlayerDetailsPageComponent} from './player-details-page/player-details-page.component';
-import {PlayerSubmissionComponent} from './player-submission/player-submission.component';
-import {RecentGamesPageComponent} from './recent-games-page/recent-games-page.component';
-import {GameConfigurationComponent} from './game-configuration/game-configuration.component';
-import {SeasonConfigurationComponent} from './season-configuration/season-configuration.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { GameSubmissionPageComponent } from './game-submission-page/game-submission-page.component';
+import { LeaderboardPageComponent } from './leaderboard-page/leaderboard-page.component';
+import { PlayerDetailsPageComponent } from './player-details-page/player-details-page.component';
+import { PlayerSubmissionComponent } from './player-submission/player-submission.component';
+import { RecentGamesPageComponent } from './recent-games-page/recent-games-page.component';
 
 const routes: Routes = [
   {
@@ -33,14 +31,6 @@ const routes: Routes = [
     path: 'players/:id',
     component: PlayerDetailsPageComponent
   },
-  {
-    path: 'games/configure',
-    component: GameConfigurationComponent
-  },
-  {
-    path: 'games/seasons',
-    component: SeasonConfigurationComponent
-  }
 ];
 
 @NgModule({

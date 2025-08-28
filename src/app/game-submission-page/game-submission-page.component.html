@@ -5,44 +5,45 @@
 
       <h3>Sport</h3>
       <mat-form-field>
-        <mat-select (selectionChange)="populateFormArrayLengths()" [formControl]="gameControl"
-                    placeholder="Select a game">
-          <mat-option *ngFor="let game of gameTypes" [value]="game">{{game.displayValue}} {{game.firstTeamSize}}v{{game.secondTeamSize}}
+        <mat-select [formControl]="gameControl" placeholder="Select a game">
+          <mat-option *ngFor="let game of gameTypes" [value]="game">{{game | gameType}}
           </mat-option>
         </mat-select>
       </mat-form-field>
 
-      <div [ngClass]="{'mask-input-controls': inputMasking()}" class="mask-input-controls">
-        <h3>First Team</h3>
+      <h3>Winning Team</h3>
+      <mat-form-field>
+        <mat-select [formControl]="winningTeamPlayer1" placeholder="Select a player">
+          <mat-option *ngFor="let player of players" [value]="player.id">{{player.firstName}} {{player.lastName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-        <mat-form-field *ngFor="let control of firstTeam.controls; let i = index">
-          <mat-select [formControl]="control" placeholder="Select a player">
-            <mat-option *ngFor="let player of players" [value]="player.id">{{player.firstName}} {{player.lastName}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+      <mat-form-field>
+        <mat-select [formControl]="winningTeamPlayer2" placeholder="Select a player">
+          <mat-option *ngFor="let player of players" [value]="player.id">{{player.firstName}} {{player.lastName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-        <h3>Second Team</h3>
+      <h3>Losing Team</h3>
+      <mat-form-field>
+        <mat-select [formControl]="losingTeamPlayer1" placeholder="Select a player">
+          <mat-option *ngFor="let player of players" [value]="player.id">{{player.firstName}} {{player.lastName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-        <mat-form-field *ngFor="let control of secondTeam.controls; let i = index">
-          <mat-select [formControl]="control" placeholder="Select a player">
-            <mat-option *ngFor="let player of players" [value]="player.id">{{player.firstName}} {{player.lastName}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <h3>Winning Team</h3>
-        <mat-form-field>
-          <mat-select [formControl]="winningTeamControl" placeholder="Select the winning team">
-            <mat-option [value]="'FIRST_TEAM'">First Team</mat-option>
-            <mat-option [value]="'SECOND_TEAM'">Second Team</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
+      <mat-form-field>
+        <mat-select [formControl]="losingTeamPlayer2" placeholder="Select a player">
+          <mat-option *ngFor="let player of players" [value]="player.id">{{player.firstName}} {{player.lastName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
     </form>
   </mat-card-content>
   <mat-card-actions>
-    <button (click)="submit()" mat-button>SUBMIT</button>
+    <button mat-button (click)="submit()">SUBMIT</button>
   </mat-card-actions>
 </mat-card>
