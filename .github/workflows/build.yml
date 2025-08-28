@@ -1,0 +1,26 @@
+name: Docker Image CI for GHCR
+on:
+  push
+jobs:
+  build_and_publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Get next version
+        uses: reecetech/version-increment@2024.10.1
+        id: version
+        with:
+          use_api: true
+          scheme: semver
+
+      - name: Build and push the image
+        run : |
+          docker login --username chutch1122 --password ${{ secrets.GHCR_PAT }} ghcr.io
+          docker build . \
+            --tag ghcr.io/chutch1122/ranking-system-v1-ui:${{ steps.version.outputs.major-version }}.${{ steps.version.outputs.minor-version }}.${{ steps.version.outputs.patch-version }} \
+            --tag ghcr.io/chutch1122/ranking-system-v1-ui:${{ steps.version.outputs.major-version }}.${{ steps.version.outputs.minor-version }} \
+            --tag ghcr.io/chutch1122/ranking-system-v1-ui:${{ steps.version.outputs.major-version }} \
+            --tag ghcr.io/chutch1122/ranking-system-v1-ui:latest
+          docker push ghcr.io/chutch1122/ranking-system-v1-ui --all-tags
