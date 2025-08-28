@@ -1,7 +1,7 @@
 ### STAGE 1: Build ###
 
 # We label our stage as 'builder'
-FROM node:8-alpine as builder
+FROM --platform=linux/amd64 node:8-alpine AS builder
 
 COPY package.json package-lock.json ./
 
@@ -20,7 +20,7 @@ RUN $(npm bin)/ng build --prod --build-optimizer
 
 ### STAGE 2: Setup ###
 
-FROM nginx:1.13.3-alpine
+FROM --platform=linux/amd64 nginx:1.13.3-alpine
 
 ## Copy our default nginx config
 COPY nginx/default.conf /etc/nginx/conf.d/
